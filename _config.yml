@@ -7,7 +7,7 @@
 
 # Site settings
 title:  buildupchao
-subtitle: 不积跬步无以至千里，不积小流无以成江海
+subtitle: Jump out of the limit and carry on
 name: buildupchao
 email: buildupchao@gmail.com
 description: 本站是buildupchao的技术分享博客。
@@ -95,24 +95,24 @@ navs:
     href: /
     label: Home
 
-  -
-    href: /spring-boot.html
-    label: Spring Boot
-    target: _self
-    subnav:
-
-      -
-        subHref: /spring-boot.html
-        subLabel: Spring Boot
-
-      -
-        subHref: /spring-cloud.html
-        subLabel: Spring Cloud
-
-  -
-    href: /spring-cloud.html
-    label: Spring Cloud
-    target: _self
+  # -
+  #   href: /spring-boot.html
+  #   label: Spring Boot
+  #   target: _self
+  #   subnav:
+  #
+  #     -
+  #       subHref: /spring-boot.html
+  #       subLabel: Spring Boot
+  #
+  #     -
+  #       subHref: /spring-cloud.html
+  #       subLabel: Spring Cloud
+  #
+  # -
+  #   href: /spring-cloud.html
+  #   label: Spring Cloud
+  #   target: _self
 
   -
 
@@ -171,22 +171,22 @@ navs:
 
 
 # selected articles
-classes:
-
-  -
-    href: /life.html
-    name: 我的故事
-    describe: 生活就是故事，故事就是生活
-
-  -
-    href: /arch.html
-    name: 架构师之路
-    describe: 一个架构师的自我修养
-
-  -
-    href: /java.html
-    name: Java 系列文章
-    describe: Java 之根基，Java 程序员必学
+# classes:
+#
+#   -
+#     href: /life.html
+#     name: 我的故事
+#     describe: 生活就是故事，故事就是生活
+#
+#   -
+#     href: /arch.html
+#     name: 架构师之路
+#     describe: 一个架构师的自我修养
+#
+#   -
+#     href: /java.html
+#     name: Java 系列文章
+#     describe: Java 之根基，Java 程序员必学
 
 
 # ---------------- #
