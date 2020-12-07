@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> 从Spark组件来剖析Spark的执行流程 - buildupchao博客 </title>
+    <meta name="keywords" content="buildupchao,buildupchao.cn,Spring,架构,大数据,Java,Hadoop,Spark,数据仓库,大数据平台">
+    <meta name="description"
+          content="&lt;h2 id=&quot;0-从对比的视角来看spark&quot;&gt;0 从对比的视角来看Spark&lt;/h2&gt;
+&lt;h3 id=&quot;01-hadoop-vs-spark&quot;&gt;0.1 Hadoop VS Spark&lt;/h3&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/spark/2017/11/03/spark-execute-process-by-spark-component.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="从Spark组件来剖析Spark的执行流程">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>从Spark组件来剖析Spark的执行流程</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2017/11/03
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <h2 id="0-从对比的视角来看spark">0 从对比的视角来看Spark</h2>
+<h3 id="01-hadoop-vs-spark">0.1 Hadoop VS Spark</h3>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-1.bmp?raw=true" alt="这里写图片描述" /></p>
+
+<h3 id="02-spark-vs-flink">0.2 Spark VS Flink</h3>
+
+<ul>
+  <li>Flink 作为后起之秀，发展迅猛，有Ali 的 Blink 在支撑，流行起来是早晚的事</li>
+  <li>流计算：Flink要强一些，真正的流计算。不过，Spark Summit 2017 大会也有说到 Spark 2.2 后重点会是流计算与深度学习</li>
+  <li>Spark SQL 或者 Hive on Spark 相对于 Flink 也是有优势的</li>
+  <li>如果深入了解了 Spark，Flink应用起来会简单很多。</li>
+</ul>
+
+<h2 id="1-从spark组件来剖析spark的执行流程">1 从Spark组件来剖析Spark的执行流程</h2>
+<h3 id="11-spark组件结构图">1.1 Spark组件结构图</h3>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-2.png?raw=true" alt="这里写图片描述" /></p>
+
+<h3 id="12-spark架构图">1.2 Spark架构图</h3>
+
+<ul>
+  <li>图1.2.1</li>
+</ul>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-3.jpeg?raw=true" alt="这里写图片描述" /></p>
+
+<ul>
+  <li>图1.2.2</li>
+</ul>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-4.jpeg?raw=true" alt="这里写图片描述" /></p>
+
+<ul>
+  <li>
+    <p>Application: Spark中的Application和 Hadoop MR中的概念是相似的，指的是用户编写的Spark应用程序，内含了一个 Driver 功能的代码和分布在集群中多个节点上运行的Executor代码。</p>
+  </li>
+  <li>
+    <p>Driver Program:Spark 中的 Driver 即运行上述 Application 的 main() 函数并且创建 SparkContext，其中创建 SparkContext 的目的是为了准备 Spark 应用程序的运行环境。在 Spark 中由 SparkContext 负责和 ClusterManager 通信，进行资源的申请、任务的分配和监控等；当 Executor 部分运行完毕后，Driver 负责将 SparkContext 关闭。通常 SparkContext 代表 Driver。</p>
+  </li>
+  <li>
+    <p>Cluster Manager:指的是在集群上获取资源的外部服务，目前有:</p>
+  </li>
+  <li>
+    <p>Standalone: Spark 原生的资源管理，由 Master 负责资源的分配；
+Hadoop Yarn: 由 YARN 中的 ResourceManager 负责资源的分配；</p>
+  </li>
+  <li>
+    <p>Worker:集群中任何可以运行 Application 代码的节点，类似于 YARN 的 NodeManager 节点。在 Standalone 模式中指的就是通过 Slave 文件配置的 Worker 节点，在Spark on Yarn 模式中指的就是 NodeManager 节点。</p>
+  </li>
+  <li>
+    <p>Executor:Application 运行在 Worker 节点上的一个进程，该进程负责运行 Task，并且负责将数据存在内存或者磁盘上，每个 Application 都有各自独立的一批 Executor。在 Spark on Yarn模式下，其进程名称为 CoarseGrainedExecutorBackend，类似于Hadoop MapReduce中的 YarnChild。一个 CoarseGrainedExecutorBackend 进程有且仅有一个 executor 对象，它负责将 Task 包装成 taskRunner，并从线程池中抽取出一个空闲线程运行Task。每个 CoarseGrainedExecutorBackend能并行运行 Task的数量就取决于分配给它的 CPU的个数了。</p>
+  </li>
+  <li>
+    <p>Job: 包含多个 Task组成的并行计算，往往由 Spark Action催生，一个Job包含多个RDD应用及作用于RDD上的各种Operation。</p>
+  </li>
+  <li>
+    <p>Stage: 每个Job会被拆分很多Task，每组Task被称为Stage，也可称为 TaskSet，一个Job分为多个Stage</p>
+  </li>
+  <li>
+    <p>Task: 被送到某个 Executor 上的工作任务</p>
+  </li>
+</ul>
+
+<h3 id="13-spark的基本运行流程图">1.3 Spark的基本运行流程图</h3>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-5.jpeg?raw=true" alt="这里写图片描述" /></p>
+
+<p>步骤如下:</p>
+
+<ul>
+  <li>
+    <p>1) 构建Spark Application的运行环境，启动 Spark Context</p>
+  </li>
+  <li>
+    <p>2) SparkContext向资源管理器（Standalone，Mesos，Yarn）申请运行Executor资源，并启动StandaloneExecutorbackend，Executor向SparkContext申请Task</p>
+  </li>
+  <li>
+    <p>3) SparkContext将应用程序分发给Executor</p>
+  </li>
+  <li>
+    <p>4) SparkContext构建成DAG图，将DAG图分解成Stage，将TaskSet发送给Task Scheduler，最后由Task Scheduler将Task发送给Executor运行</p>
+  </li>
+  <li>
+    <p>5) Task在Executor上运行，运行完毕释放所有资源</p>
+  </li>
+</ul>
+
+<h3 id="14-spark的完整运行流程图">1.4 Spark的完整运行流程图</h3>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-03-6.jpeg?raw=true" alt="这里写图片描述" /></p>
+
+<h3 id="15-spark运行架构的特点">1.5 Spark运行架构的特点</h3>
+
+<ul>
+  <li>
+    <p>1) 每个Application获取专属的Executor进程，该进程在Application期间一直驻留，并以多线程方式运行Task。这种Application隔离机制是有优势的，无论是从调度角度看（每个Driver调度他自己的任务），还是从运行角度看（来自不同Application的Task运行在不同JVM中），当然这样意味着Spark Application不能跨应用程序共享数据，除非将数据写入外部存储系统</p>
+  </li>
+  <li>
+    <p>2) Spark与资源管理器无关，只要能够获取Executor进程，并能保持相互通信就可以了</p>
+  </li>
+  <li>
+    <p>3) 提交SparkContext的Client应该靠近Worker节点（运行Executor的节点），最好是在同一个Rack里，因为Spark Application运行过程中SparkContext和Executor之间有大量的信息交换，如果在远程集群中运行，最好使用RPC 将 SparkContext提交给集群，不要远离Worker运行SparkContext</p>
+  </li>
+  <li>
+    <p>4) Task采用了数据本地性和推测执行的优化机制</p>
+  </li>
+</ul>
+
+<h2 id="reference-link">Reference Link</h2>
+
+<ul>
+  <li>
+    <p>[1] <a href="https://blog.xiaoxiaomo.com/2017/07/05/Spark-%E4%BB%8ESpark%E7%BB%84%E4%BB%B6%E6%9D%A5%E7%9C%8BSpark%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/">Spark 执行流程</a></p>
+  </li>
+  <li>
+    <p>[2] <a href="http://blog.csdn.net/beliefer/article/details/50561247">Spark设计理念与基础架构</a></p>
+  </li>
+</ul>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/spark/2017/11/09/how-increasing-task-concurrent-for-spark-streaming.html" rel="prev">Spark Streaming中，增大任务并发度的方法有哪些？</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/latestreading/2017/10/22/java-middleware-technology-from-alibaba.html" rel="next">阅读 | 《大型网站系统与Java中间件实践》</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/spark/2017/11/03/spark-execute-process-by-spark-component.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>

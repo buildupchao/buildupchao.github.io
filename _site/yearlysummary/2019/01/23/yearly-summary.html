@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> 2018年度复盘，2019年度规划 - buildupchao博客 </title>
+    <meta name="keywords" content="buildupchao,buildupchao.cn,Spring,架构,大数据,Java,Hadoop,Spark,数据仓库,大数据平台">
+    <meta name="description"
+          content="&lt;p&gt;2018年度复盘，比起前两度总结晚了将近一个月。2018年，经历了很多事情，也中途换了一份新工作，但追求技术的心仍然没有改变。&lt;/p&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/yearlysummary/2019/01/23/yearly-summary.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="2018年度复盘，2019年度规划">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>2018年度复盘，2019年度规划</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2019/01/23
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>2018年度复盘，比起前两度总结晚了将近一个月。2018年，经历了很多事情，也中途换了一份新工作，但追求技术的心仍然没有改变。</p>
+
+<h2 id="2018可能是极其焦虑不安的一年"><strong>2018，可能是极其焦虑不安的一年</strong></h2>
+
+<ul>
+  <li>
+    <p>亲儿子 ‘sales-order-portal’ 诞生了</p>
+
+    <p>从代码构思、设计到Coding，以及中途进行的一次小重构，直至最后的上线，都只是一个人在战斗，虽然过程心酸，但是结果是美好的。</p>
+
+    <p>也很欣慰那段忙碌的日子里，有前端搭档Charles和QC小姐姐Gina的陪伴。
+<!-- more --></p>
+  </li>
+  <li>
+    <p>离开的时候总是那么的平静</p>
+
+    <p>确定要做大数据开发后，就开始做各项交接准备，直至最后收到几家offer。可能是因为还不想离开北京吧，最终放弃了杭州的offer，而选择了金山的大数据开发。</p>
+
+    <p>在金山，加入了KS Team，遇到了一群很友好的朋友，没有了外企的清冷。</p>
+  </li>
+  <li>
+    <p>无休息平滑入职金山</p>
+
+    <p>原来入职就开始成为主力是真的，很感谢7~8月那段时间，自己不论是心理还是能力上都提升很快。</p>
+
+    <p>也很感谢瑞哥的照顾和培养，总是很信任我，放手让我去按照自己想法去Coding，即使被我坑了，也能从容化解各种难题。</p>
+  </li>
+  <li>
+    <p>西安之行</p>
+
+    <p>这是毕业之后第一次外出旅游吧，还是和我们Gina小姐姐，一起在西安城玩了一周，逛了各种景点，品尝了各种小吃。最后一天我们以夜登华山，从北峰上，在东峰瑟瑟发抖看的日出，又从西峰坐缆车下山，当天便启程返京。</p>
+  </li>
+  <li>
+    <p>元旦漠河之行</p>
+
+    <p>旅行中结识了一群有趣的人，使得整个旅途都洋溢着幸福。到达了国界，也亲身体验了泼水成冰……最后在哈尔滨饱览了冰雕艺术，也完成了人生中第一次滑雪，竟然自学成才的掌握了刹车、转向等技巧。</p>
+  </li>
+  <li>
+    <p>空旷的Github commit
+<img src="https://github.com/buildupchao/ImgStore/blob/master/blog/github-commit-2018.png?raw=true" alt="在这里插入图片描述" /></p>
+
+    <p>2018年，Github的小绿点少的可怜，深感自责与不安，这一年我到底做了些什么？</p>
+  </li>
+  <li>
+    <p>2018年计划完成情况</p>
+
+    <p>Java源码阅读以及微服务的研究与学习一直在坚持，Spark却搁浅了。</p>
+
+    <p>stream-plus当时做的原因是为了满足微服务中数据组装需求，却因为没有调研好已存在的开源工具，导致小失落了一段时间。但是我会坚持把它做好，就当是学习了。</p>
+
+    <p>如果打分的话，可能最多给自己70分吧。怎么说呢，这一年放了太多的时间在理论知识上，毕竟不能一味的研究源码，适当也需要自主创新一下，去实践验证下自己的技术；其次，连博客质量也差的不行，还有凑数嫌疑，希望新的一年中能有所改进；最后，需要调整好心态，不要让自己过于追求什么，毕竟还有“生活不止眼前的苟且，还有诗和远方的田野”。</p>
+  </li>
+</ul>
+
+<h2 id="2019年希望真的能够万物生长"><strong>2019年，希望真的能够万物生长</strong></h2>
+
+<ul>
+  <li>
+    <p>工作</p>
+
+    <p>多问、多学、多想，不要做技术哑巴。</p>
+
+    <p>尽量不拖团队后退，多和老司机交流沟通，学习软技能。Up！</p>
+
+    <p>把自己代码写的更6一些，从而提高工作效率，为自己争取一些做其他的时间。</p>
+  </li>
+  <li>
+    <p>技术</p>
+
+    <p>之前一直觉得自己是个技术狂，但是狂在哪了呢？估计都是狂在源码阅读上了，此处黯然神伤啊……哈哈……最近在恶补Hive相关技术和架构底层（网络、IO、OS）方面技能，争取今年能稳妥拿下。</p>
+  </li>
+  <li>
+    <p>开源项目</p>
+
+    <p>开始把技术产出，加入或者创建开源项目，争取做出来高质量的能达到300+ stars的项目。</p>
+  </li>
+  <li>
+    <p>技术博客</p>
+
+    <p>要开始重新拾起写博客的习惯，并且保证博客质量，不要为了凑数而写一些毫无营养的文章。坚持每月产出3篇博客，其中2篇是高质量的博客。</p>
+  </li>
+  <li>
+    <p>健身</p>
+
+    <p>过完年，开始跟着辉辉一起健身，保持好身体和好身材才是王道，哈哈哈！</p>
+  </li>
+  <li>
+    <p>考研</p>
+
+    <p>希望自己能考研成功！</p>
+  </li>
+</ul>
+
+<h2 id="总结"><strong>总结</strong></h2>
+
+<ul>
+  <li>要逼自己一把，看看自己到底有多优秀，哈哈哈哈哈！</li>
+  <li>要逼就要往死里逼，不要给自己喘息的机会，看看自己到底能不能有所突破！</li>
+  <li>开源项目时一定要做的，不能私藏，好项目或者技术就要和大家分享，争取拿下300+ stars，但是也不要奢望过高。</li>
+  <li>一定要坚持健身，同时准备重新买辆山地车吧，不然没车的日子真的好难受啊！（对于偷我车的就不想说什么了……）</li>
+  <li>希望自己能够越来越优秀吧！</li>
+</ul>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/java/2019/01/27/how-to-save-or-restore-core-memory-data-of-Java-application.html" rel="prev">如何保存/恢复Java应用程序核心内存数据现场？</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/java/2018/10/10/mysql-load-table-remarks.html" rel="next">为何通过java.sql.DatabaseMetaData获取MySQL的table remarks总是为空？</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/yearlysummary/2019/01/23/yearly-summary.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>

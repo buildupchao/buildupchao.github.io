@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> MapJoin和ReduceJoin区别及优化 - buildupchao博客 </title>
+    <meta name="keywords" content="buildupchao,buildupchao.cn,Spring,架构,大数据,Java,Hadoop,Spark,数据仓库,大数据平台">
+    <meta name="description"
+          content="&lt;h2 id=&quot;1-map-side-joinbroadcast-join&quot;&gt;1 Map-side Join（Broadcast join）&lt;/h2&gt;
+&lt;p&gt;思想：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;小表复制到各个节点上，并加载到内存中；大表分片，与小表完成连接操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/hadoop/2017/11/18/bigdata-mapjoin-and-reducejoin.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="MapJoin和ReduceJoin区别及优化">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>MapJoin和ReduceJoin区别及优化</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2017/11/18
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <h2 id="1-map-side-joinbroadcast-join">1 Map-side Join（Broadcast join）</h2>
+<p>思想：</p>
+<blockquote>
+  <p>小表复制到各个节点上，并加载到内存中；大表分片，与小表完成连接操作。</p>
+</blockquote>
+
+<p>两份数据中，如果有一份数据比较小，小数据全部加载到内存，按关键字建立索引。大数据文件作为map的输入，对map()函数每一对输入，都能够方便的和已加载到内存的小数据进行连接。把连接结果按key输出，经过shuffle阶段，reduce端得到的就是已经按key分组的，并且连接好了的数据。</p>
+
+<p>这种方法，要使用Hadoop中的DistributedCache把小数据分布到各个计算节点，每个map节点都要把小数据加载到内存，按关键字建立索引。</p>
+
+<ul>
+  <li>
+    <p>Join操作在map task中完成，因此无需启动reduce task</p>
+  </li>
+  <li>
+    <p>适合一个大表，一个小表的连接操作</p>
+  </li>
+</ul>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-18-1.png?raw=true" alt="这里写图片描述" /></p>
+
+<ul>
+  <li>这种方法有明显的局限性：
+    <ul>
+      <li>有一份数据比较小，在map端，能够把它加载在内存，并进行join操作。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-reduce-side-joinshuffle-join">2 Reduce-side Join（shuffle join）</h2>
+<p>思想：</p>
+<blockquote>
+  <p>map端按照连接字段进行hash，reduce端完成连接操作</p>
+</blockquote>
+
+<p>在map阶段，把关键字作为key输出，并在value中标记出数据是来自data1还是data2。因为在shuffle阶段已经自然按key分组，reduce阶段，判断每一个value是来自data1还是data2，在内部分成两组，做集合的成绩。</p>
+
+<ul>
+  <li>
+    <p>Join操作在reduce task中完成</p>
+  </li>
+  <li>
+    <p>适合两个大表的连接操作</p>
+  </li>
+</ul>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/2017-11-18-2.png?raw=true" alt="这里写图片描述" /></p>
+
+<ul>
+  <li>这种方法有2个问题：
+    <ul>
+      <li>map阶段没有对数据瘦身，shuffle的网络传输和排序性能很低。</li>
+      <li>reduce端对2个集合做乘积计算，很耗内存，容易导致OOM。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-优化方案">3 优化方案</h2>
+
+<ul>
+  <li>
+    <p>使用内存服务器，扩大节点的内存空间
+针对map join，可以报一份数据放到专门的内存服务器，在map()方法中，对每一个的输入对，根据key到内存服务器中取出数据，进行连接。</p>
+  </li>
+  <li>
+    <p>使用BloomFilter过滤空连接的数据
+对其中一份数据在内存中建立BloomFilter，另外一份数据在连接之前，用BloomFilter判断它的key是否存在，如果不存在，那这个记录是空连接，可以忽略。</p>
+  </li>
+  <li>
+    <p>使用map reduce专为join设计的包
+在map reduce包看到有专门为join设计的包，对这些包还没有学习，不知道怎么使用，只是在这里记录下来，做个提醒。</p>
+  </li>
+</ul>
+
+<pre><code>jar: mapreduce-client-core.jar
+
+package: org.apache.hadoop.mapreduce.lib.join
+</code></pre>
+
+<h2 id="reference-link">Reference Link</h2>
+<ul>
+  <li>
+    <p>[1] <a href="http://blog.csdn.net/liuj2511981/article/details/8616730">hive mapjoin使用和个人理解</a></p>
+  </li>
+  <li>
+    <p>[2] <a href="http://blog.csdn.net/lpxuan151009/article/details/7956544">hive优化(1)之mapjoin</a></p>
+  </li>
+  <li>
+    <p>[3] <a href="http://dongxicheng.org/framework-on-yarn/apache-spark-join-two-tables/">董西成，Apache Spark探秘：实现Map-side Join和Reduce-side Join</a></p>
+  </li>
+</ul>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/yearlysummary/2018/01/01/new-year-new-me-summary.html" rel="prev">New Year, New Me</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/datastructureandalgo/2017/11/15/datastructure-and-algorithem-archive.html" rel="next">数据结构与算法整理</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/hadoop/2017/11/18/bigdata-mapjoin-and-reducejoin.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>
