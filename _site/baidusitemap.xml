@@ -2,6 +2,24 @@
 <urlset xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</loc>
+    
+    <lastmod>2020-12-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</loc>
+    
+    <lastmod>2020-12-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</loc>
     
     <lastmod>2020-12-07T00:00:00+08:00</lastmod>
@@ -11,9 +29,45 @@
   </url>
   
   <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</loc>
+    
+    <lastmod>2020-11-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</loc>
+    
+    <lastmod>2020-11-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</loc>
+    
+    <lastmod>2020-11-07T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</loc>
     
     <lastmod>2020-03-17T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</loc>
+    
+    <lastmod>2020-02-17T00:00:00+08:00</lastmod>
     
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -558,6 +612,16 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
