@@ -5,8 +5,8 @@
     <description>本站是buildupchao的技术分享博客。</description>
     <link>http://www.buildupchao.cn/</link>
     <atom:link href="http://www.buildupchao.cn/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Dec 2020 14:05:00 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Dec 2020 14:05:00 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Dec 2020 18:08:26 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Dec 2020 18:08:26 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -131,7 +131,63 @@
     
       <item>
         <title>Log4j2日志滚动策略的魔鬼槽点</title>
-        <description>&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/Flume-Log4j2-split-log-logic-open.png?raw=true&quot; alt=&quot;log4j2日志切分流程图&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;参数说明：&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;参数名称&lt;/th&gt;
+      &lt;th&gt;类型&lt;/th&gt;
+      &lt;th&gt;描述&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interval&lt;/td&gt;
+      &lt;td&gt;integer&lt;/td&gt;
+      &lt;td&gt;根据日期格式中最具体的时间单位来决定应该多久发生一次rollover。例如，在日期模式中小时为具体的时间单位，那么每4小时会发生4次rollover，默认值为1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;modulate&lt;/td&gt;
+      &lt;td&gt;boolean&lt;/td&gt;
+      &lt;td&gt;表示是否调整时间间隔以使在时间间隔边界发生下一个rollover。例如：假设小时为具体的时间单元，当前时间为上午3点，时间间隔为4，第一次发送rollover是在上午4点，接下来是上午8点，接着是中午，接着是下午4点等发生。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;由上图我们展开两个测试用例：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;case 1：如何实现天粒度切分日志？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.jpg?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;case 2: 如何实现小时粒度（基于秒）切分日志？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.jpg?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以，log4j2中&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;切分文件策略，是基于filePattern中的&lt;code&gt;%d{yyyy-MM-dd-HH-mm-ss}&lt;/code&gt;来决定到底采用哪种时间单位（天、小时、分钟、秒等）。&lt;/p&gt;
+
+&lt;p&gt;那上面两种方式有没有错误呢？？？答案是 case 2 是有点问题的。&lt;/p&gt;
+
+&lt;p&gt;我们已经指定了 &lt;code&gt;modulus&lt;/code&gt; （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时。&lt;/p&gt;
+
+&lt;p&gt;我们再来看下Log4j2基于时间切分逻辑底层&lt;code&gt;org.apache.logging.log4j.core.appender.rolling.PatternProcessor&lt;/code&gt;判断逻辑(部分截图)：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-1.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以，这种奇葩的实现逻辑，略有些逆人性，真的很容易踩坑。&lt;/p&gt;
+
+&lt;p&gt;但是说到底还是对log4j2切分策略不够熟悉，导致使用上有所偏差。&lt;/p&gt;
+
+&lt;p&gt;等后面有空，再对log4j2的disruptor使用进行详细总结~&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
         <link>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</link>
