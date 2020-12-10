@@ -12,12 +12,12 @@
     <title> MySQL超大临时表问题回顾 - buildupchao博客 </title>
     <meta name="keywords" content="db,java,mysql,数据库,性能优化">
     <meta name="description"
-          content="&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
+          content="&lt;h2 id=&quot;1问题背景&quot;&gt;1.问题背景&lt;/h2&gt;
 
 ">
 
-    <link rel="canonical" href="http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html">
-    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+    <link rel="canonical" href="http://localhost:4000/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://localhost:4000/feed.xml">
 
     <!-- Third-Party CSS -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -238,11 +238,13 @@
         
         <div class="col-md-9 markdown-body">
 
-            <h2 id="问题背景">问题背景</h2>
+            <h2 id="1问题背景">1.问题背景</h2>
 
 <p>近期接到运维同学反馈，数仓线上MySQL数据库产生了一个500G的临时表。500G！500G！500G！</p>
 
-<h2 id="排查定位">排查定位</h2>
+<!-- more -->
+
+<h2 id="2排查定位">2.排查定位</h2>
 
 <p>通过pma访问数据库实例，执行<code>show full processlist</code>找到可疑的那个SQL（可疑查看Time字段，单位：秒）</p>
 
@@ -269,9 +271,9 @@
 
 <p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_4.png?raw=true" alt="" /></p>
 
-<p>嗯，好，没有临时表问题了~</p>
+<p>嗯，好，没有超级临时表问题了~</p>
 
-<h2 id="问题复盘">问题复盘</h2>
+<h2 id="3问题复盘">3.问题复盘</h2>
 
 <p>其实这个SQL并不复杂，但是为啥之前没有暴露出来问题呢？我想原因有两点：</p>
 
