@@ -56,6 +56,15 @@
   </url>
   
   <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</loc>
+    
+    <lastmod>2020-04-20T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</loc>
     
     <lastmod>2020-03-17T00:00:00+08:00</lastmod>
@@ -612,6 +621,10 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  
+  
+  
   
   
   

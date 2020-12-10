@@ -5,8 +5,8 @@
     <description>本站是buildupchao的技术分享博客。</description>
     <link>http://www.buildupchao.cn/</link>
     <atom:link href="http://www.buildupchao.cn/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Dec 2020 19:08:01 +0800</pubDate>
-    <lastBuildDate>Thu, 10 Dec 2020 19:08:01 +0800</lastBuildDate>
+    <pubDate>Thu, 10 Dec 2020 19:46:03 +0800</pubDate>
+    <lastBuildDate>Thu, 10 Dec 2020 19:46:03 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -336,6 +336,67 @@
       </item>
     
       <item>
+        <title>MySQL超大临时表问题回顾</title>
+        <description>&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;近期接到运维同学反馈，数仓线上MySQL数据库产生了一个500G的临时表。500G！500G！500G！&lt;/p&gt;
+
+&lt;h2 id=&quot;排查定位&quot;&gt;排查定位&lt;/h2&gt;
+
+&lt;p&gt;通过pma访问数据库实例，执行&lt;code&gt;show full processlist&lt;/code&gt;找到可疑的那个SQL（可疑查看Time字段，单位：秒）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_1.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以通过设置“选项”显示完整SQL内容：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;回到项目代码中找到产生改SQL的地方（已经针对关键部分进行伪代码改写）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;select distinct device as value from (select device from database_name.table_name where device &amp;lt;&amp;gt; 'your_value' and device &amp;lt;&amp;gt; '' order by date, device desc) a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong style=&quot;color:red;&quot;&gt;到这里需要说一句，该SQL寻找过程比较曲折，居然是通过String一点一点拼接的，强烈抗议！！！有ORM框架为何不用？？？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我们通过&lt;code&gt;explain&lt;/code&gt;查看执行计划来继续分析SQL：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_3.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯~的确是采用了临时表……&lt;/p&gt;
+
+&lt;p&gt;那我们把SQL改吧改吧，然后重新查看下执行计划：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_4.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯，好，没有临时表问题了~&lt;/p&gt;
+
+&lt;h2 id=&quot;问题复盘&quot;&gt;问题复盘&lt;/h2&gt;
+
+&lt;p&gt;其实这个SQL并不复杂，但是为啥之前没有暴露出来问题呢？我想原因有两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong style=&quot;color:red;&quot;&gt;数据量&lt;/strong&gt;：在数据量没有达到一定量级的时候，一些问题往往会被掩盖了，很难凸显出来，或者对系统造成毁灭性的影响；&lt;/li&gt;
+  &lt;li&gt;&lt;strong style=&quot;color:red;&quot;&gt;主动型&lt;/strong&gt;：在问题没有发生的时候，当你看到这个SQL，你是否会有改掉它的意识并且执行起来呢？？？而不是表示对前人的尊敬呢？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;“往往魔鬼总在细节中”。千里之堤毁于蚁穴，希望我们都能够引以为戒！&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</guid>
+        
+        <category>mysql</category>
+        
+        <category>java</category>
+        
+        <category>db</category>
+        
+        
+        <category>onlinetroubleshooting</category>
+        
+      </item>
+    
+      <item>
         <title>没有Spring cron时该怎么定点执行定时任务？</title>
         <description>&lt;p&gt;最近有个小需求，在普通Java项目里面，不能借助于Spring，也不能使用复杂的jar，来实现cron定点定时任务。&lt;br /&gt;
 通过查询资料，发现一个好用的工具：hutool&lt;br /&gt;&lt;/p&gt;
@@ -437,147 +498,6 @@
         <pubDate>Thu, 16 Jan 2020 00:00:00 +0800</pubDate>
         <link>http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</link>
         <guid isPermaLink="true">http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</guid>
-        
-        <category>Flink</category>
-        
-        <category>大数据</category>
-        
-        
-        <category>flink</category>
-        
-      </item>
-    
-      <item>
-        <title>Flink Table API &amp; SQL</title>
-        <description>&lt;h2 id=&quot;table-api--sql介绍&quot;&gt;Table API &amp;amp; SQL介绍&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Apache Flink具有两个关系API：表API和SQL，用于统一流和批处理。Table API是Scala和Java的语言集成查询API，查询允许组合关系运算符，例如过滤和连接。Flink SQL支持标准的SQL语法。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Table API和SQL接口彼此集成，FLink的DataStream和DataSet API亦是如此。你可以轻松地基于API构建的所有API和库之间切换。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;注意，到目前最新版本位置，Table API和SQL还有很多功能正在开发中。并非[Table API, SQL]和[Stream, Batch]输入的每种组合都支持所有操作。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!-- more --&gt;
-
-&lt;h3 id=&quot;1为什么需要table-api--sql&quot;&gt;1.为什么需要Table API &amp;amp; SQL&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Table API是一种关系型API，类SQL的API，用户可以像操作表一样地操作数据，非常的直观和方便。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;SQL作为一个”人所皆知”的语言，如果一个引擎提供SQL，它将很容易被人们接受。这已经是业界很常见的现象。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Table &amp;amp; SQL API还有另外一个职责，就是流处理和批处理统一的API层。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;2table-api--sql流处理概述&quot;&gt;2.Table API &amp;amp; SQL流处理概述&lt;/h3&gt;
-
-&lt;p&gt;Flink的Table API和SQL支持是用于批处理和流处理的统一API。这意味着Table API和SQL查询具有相同的语义，无论它们的输入是有界批量输入还是无界流输入。因为关系代数（relational algebra）和SQL最初是为批处理而设计的，所以对于无界流输入的关系查询不像有界批输入上的关系查询那样容易理解。&lt;/p&gt;
-
-&lt;h4 id=&quot;21流数据上的关系查询&quot;&gt;2.1.流数据上的关系查询&lt;/h4&gt;
-
-&lt;p&gt;SQL和Relational algebra并没有考虑到流数据。因此，在关系代数（和SQL）和流处理之间有一些概念上的差距。
-&lt;br /&gt;&lt;/p&gt;
-&lt;table&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;关系代数/SQL&lt;/th&gt;
-            &lt;th&gt;流处理&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-        &lt;tr&gt;
-            &lt;td&gt;关系（或表）是有界的（多）元组的集合&lt;/td&gt;
-            &lt;td&gt;流式无界的元组序列&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;对批处理数据执行的查询（例如，关系数据库中的表）可以访问完整的输入数据&lt;/td&gt;
-            &lt;td&gt;流式查询在启动时无法访问所有数据，必须等待流式传输数据&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;批处理查询在生成固定大小的结果后终止&lt;/td&gt;
-            &lt;td&gt;流式查询会根据收到的记录不断更新其结果，并且永远不会完成&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&quot;22动态表和连续查询&quot;&gt;2.2动态表和连续查询&lt;/h4&gt;
-
-&lt;p&gt;动态表（Dynamic table）是Flink Table API和SQL支持流数据的核心概念。与表示批处理数据的静态表（static table）相比，动态表会随时间而变化，并且可以像静态批处理表一样查询。查询动态表会生成连续查询（Continuous Query）。连续查询永远不会终止并生成动态表作为结果。查询不断更新其结果以反映其输入表的更改。
-&lt;br /&gt;
-&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-1.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;23在流上定义表&quot;&gt;2.3在流上定义表&lt;/h4&gt;
-
-&lt;p&gt;为了使用关系查询处理流，必须将其转换为表。从概念上将，流的每个记录都被解释为对结果表的INSERT修改。下图显示了点击事件流（左侧）如何转换为表（右侧）。随着更多的点击事件的插入，结果表不断增长。
-&lt;br /&gt;
-&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;24连续查询&quot;&gt;2.4连续查询&lt;/h4&gt;
-
-&lt;p&gt;在动态表上进行连续查询，并生成新的动态表。与批查询相反，连续查询不会停止更新其结果表。在任何时间点，连续查询的结果在语义上等同于在输入表的快照上以批处理模式执行的相同查询的结果。
-&lt;br /&gt;
-&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-3.png?raw=true&quot; alt=&quot;&quot; /&gt;
-&lt;br /&gt;
-&lt;br /&gt;
-&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-4.png?raw=true&quot; alt=&quot;&quot; /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;25表转换到流&quot;&gt;2.5表转换到流&lt;/h4&gt;
-
-&lt;p&gt;流查询的结果表将被动态更新，即，随着新纪录到达查询的输入流，它也发生变化。因此，将这样的动态查询转换成的DataStream需要对表的更新进行编码。
-&lt;br /&gt;
-将表转换为数据流有两种方式：
-&lt;br /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Append-only Mode：只有在动态Table仅通过INSERT更新修改时才能使用此模式，即它仅附加，并且以前发出的结果永远不会更新。如果更新或删除操作使用追加模式会失败报错。&lt;/li&gt;
-  &lt;li&gt;Retract Mode：始终可以使用此模式。返回值是boolean类型。它用true或false来标记数据的插入或撤回，返回true代表数据插入，false代表数据的撤回。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-5.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3flink-sql-connector&quot;&gt;3.Flink SQL Connector&lt;/h3&gt;
-
-&lt;p&gt;Flink的表API和SQL程序可以连接到其他外部系统来读写批处理表和流表。&lt;br /&gt;
-Table source提供对存储在外部系统（如数据库、键值存储、消息队列或文件系统）中的数据的访问。&lt;br /&gt;
-Table Sink将表发送到外部存储系统。
-&lt;br /&gt;
-&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/flink/flink-foundation/dynamic-table-and-continuous-query-6.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4flink-table-api&quot;&gt;4.Flink Table API&lt;/h3&gt;
-
-&lt;p&gt;Table API使用一个Scala和Java的语言集成查询API，是基于Table类。Table类代表了一个流或者批表，并提供方法来使用关系型操作。这些方法返回一个新的Table对象，这个新的Table对象代表着输入的Table应用关系型操作后的结果。
-&lt;br /&gt;
-&lt;a href=&quot;https://github.com/buildupchao/flink-examples/blob/master/src/main/java/com/buildupchao/flinkexamples/batch/api/BatchTableExample.java&quot;&gt;代码：批表案例&lt;/a&gt;
-&lt;br /&gt;
-&lt;a href=&quot;https://github.com/buildupchao/flink-examples/blob/master/src/main/java/com/buildupchao/flinkexamples/stream/StreamTableApiAndSqlExample.java&quot;&gt;代码：流表案例&lt;/a&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;5flink-sql&quot;&gt;5.Flink SQL&lt;/h3&gt;
-
-&lt;p&gt;Flink SQL集成是基于Apache Calcite，Apache Calcite实现了标准的SQL。
-&lt;br /&gt;
-&lt;a href=&quot;https://github.com/buildupchao/flink-examples/blob/master/src/main/java/com/buildupchao/flinkexamples/batch/sql/BatchOrderCaseSQLExample.java&quot;&gt;代码：订单案例&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;资料快链&quot;&gt;资料快链&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/&quot;&gt;官网：Table API &amp;amp; SQL&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/table/sql.html&quot;&gt;官网：Flink保留字列表&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 13 Jan 2020 00:00:00 +0800</pubDate>
-        <link>http://www.buildupchao.cn/flink/2020/01/13/flink-table-api-and-sql.html</link>
-        <guid isPermaLink="true">http://www.buildupchao.cn/flink/2020/01/13/flink-table-api-and-sql.html</guid>
         
         <category>Flink</category>
         
