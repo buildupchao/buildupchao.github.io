@@ -5,8 +5,8 @@
     <description>本站是buildupchao的技术分享博客。</description>
     <link>http://www.buildupchao.cn/</link>
     <atom:link href="http://www.buildupchao.cn/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Dec 2020 23:30:30 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Dec 2020 23:30:30 +0800</lastBuildDate>
+    <pubDate>Thu, 10 Dec 2020 19:08:01 +0800</pubDate>
+    <lastBuildDate>Thu, 10 Dec 2020 19:08:01 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -130,7 +130,7 @@
       </item>
     
       <item>
-        <title>Log4j2日志滚动策略的魔鬼槽点</title>
+        <title>Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点</title>
         <description>&lt;p&gt;&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;参数说明：&lt;/p&gt;
 
 &lt;!-- more --&gt;
@@ -163,19 +163,19 @@
   &lt;li&gt;case 1：如何实现天粒度切分日志？&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.jpg?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;case 2: 如何实现小时粒度（基于秒）切分日志？&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.jpg?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;所以，log4j2中&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;切分文件策略，是基于filePattern中的&lt;code&gt;%d{yyyy-MM-dd-HH-mm-ss}&lt;/code&gt;来决定到底采用哪种时间单位（天、小时、分钟、秒等）。&lt;/p&gt;
 
-&lt;p&gt;那上面两种方式有没有错误呢？？？答案是 case 2 是有点问题的。&lt;/p&gt;
+&lt;p&gt;那上面两种方式有没有错误呢？？？逻辑上没问题，但是case 2却没有达到我们想要的，我们其实是想要达到凌晨0点切分时间的（而不是推延24小时）。&lt;/p&gt;
 
-&lt;p&gt;我们已经指定了 &lt;code&gt;modulus&lt;/code&gt; （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时。&lt;/p&gt;
+&lt;p&gt;我们已经指定了 &lt;code&gt;modulus&lt;/code&gt; （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时，这是为什么呢？&lt;/p&gt;
 
 &lt;p&gt;我们再来看下Log4j2基于时间切分逻辑底层&lt;code&gt;org.apache.logging.log4j.core.appender.rolling.PatternProcessor&lt;/code&gt;判断逻辑(部分截图)：&lt;/p&gt;
 
@@ -183,11 +183,68 @@
 
 &lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;所以，这种奇葩的实现逻辑，略有些逆人性，真的很容易踩坑。&lt;/p&gt;
+&lt;p&gt;我们再进入&lt;code&gt;increment&lt;/code&gt;函数查看下实现：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-3.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;哦~原来如此，当我们指定了&lt;code&gt;modulus&lt;/code&gt;时，它是根据我们的filePattern最后一位为基准0进行推延计算的。&lt;/p&gt;
+
+&lt;p&gt;也就是说，我们可以得出来如下的表格：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;filePattern&lt;/th&gt;
+      &lt;th&gt;increment&lt;/th&gt;
+      &lt;th&gt;prevFileTime（采用非时间戳方式表示）&lt;/th&gt;
+      &lt;th&gt;nextFileTime（采用非时间戳方式表示）&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH-mm-ss&lt;/td&gt;
+      &lt;td&gt;7200&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-56-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH-mm&lt;/td&gt;
+      &lt;td&gt;120&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-11-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2021-01-01-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2021-01-01-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;所以，这种略有些逆人性的实现逻辑，真的很容易踩坑。&lt;/p&gt;
 
 &lt;p&gt;但是说到底还是对log4j2切分策略不够熟悉，导致使用上有所偏差。&lt;/p&gt;
 
-&lt;p&gt;等后面有空，再对log4j2的disruptor使用进行详细总结~&lt;/p&gt;
+&lt;p&gt;等后面有空，再对log4j2的disruptor使用也进行详细总结~&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
         <link>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</link>

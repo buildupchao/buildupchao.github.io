@@ -9,7 +9,7 @@
     <!-- Favicon Icon -->
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
 
-    <title> Log4j2日志滚动策略的魔鬼槽点 - buildupchao博客 </title>
+    <title> Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点 - buildupchao博客 </title>
     <meta name="keywords" content="java,log4j2,日志滚动切分">
     <meta name="description"
           content="&lt;p&gt;&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;参数说明：&lt;/p&gt;
@@ -195,13 +195,13 @@
 
 
         <div class="content">
-            <section class="jumbotron geopattern" data-pattern-id="Log4j2日志滚动策略的魔鬼槽点">
+            <section class="jumbotron geopattern" data-pattern-id="Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点">
     <div class="container">
         <div id="jumbotron-meta-info">
             
             
             
-              <h1>Log4j2日志滚动策略的魔鬼槽点</h1>
+              <h1>Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点</h1>
             
 
             <span class="meta-info">
@@ -270,19 +270,19 @@
   <li>case 1：如何实现天粒度切分日志？</li>
 </ul>
 
-<p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.jpg?raw=true" alt="" /></p>
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.png?raw=true" alt="" /></p>
 
 <ul>
   <li>case 2: 如何实现小时粒度（基于秒）切分日志？</li>
 </ul>
 
-<p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.jpg?raw=true" alt="" /></p>
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.png?raw=true" alt="" /></p>
 
 <p>所以，log4j2中<code>TimeBasedTriggeringPolicy</code>切分文件策略，是基于filePattern中的<code>%d{yyyy-MM-dd-HH-mm-ss}</code>来决定到底采用哪种时间单位（天、小时、分钟、秒等）。</p>
 
-<p>那上面两种方式有没有错误呢？？？答案是 case 2 是有点问题的。</p>
+<p>那上面两种方式有没有错误呢？？？逻辑上没问题，但是case 2却没有达到我们想要的，我们其实是想要达到凌晨0点切分时间的（而不是推延24小时）。</p>
 
-<p>我们已经指定了 <code>modulus</code> （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时。</p>
+<p>我们已经指定了 <code>modulus</code> （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时，这是为什么呢？</p>
 
 <p>我们再来看下Log4j2基于时间切分逻辑底层<code>org.apache.logging.log4j.core.appender.rolling.PatternProcessor</code>判断逻辑(部分截图)：</p>
 
@@ -290,11 +290,68 @@
 
 <p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-2.png?raw=true" alt="" /></p>
 
-<p>所以，这种奇葩的实现逻辑，略有些逆人性，真的很容易踩坑。</p>
+<p>我们再进入<code>increment</code>函数查看下实现：</p>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-3.png?raw=true" alt="" /></p>
+
+<p>哦~原来如此，当我们指定了<code>modulus</code>时，它是根据我们的filePattern最后一位为基准0进行推延计算的。</p>
+
+<p>也就是说，我们可以得出来如下的表格：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>filePattern</th>
+      <th>increment</th>
+      <th>prevFileTime（采用非时间戳方式表示）</th>
+      <th>nextFileTime（采用非时间戳方式表示）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yyyy-MM-dd-HH-mm-ss</td>
+      <td>7200</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2020-12-10-14-56-00</td>
+    </tr>
+    <tr>
+      <td>yyyy-MM-dd-HH-mm</td>
+      <td>120</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2020-12-10-14-00-00</td>
+    </tr>
+    <tr>
+      <td>yyyy-MM-dd-HH</td>
+      <td>2</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2020-12-10-14-00-00</td>
+    </tr>
+    <tr>
+      <td>yyyy-MM-dd</td>
+      <td>1</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2020-12-11-00-00-00</td>
+    </tr>
+    <tr>
+      <td>yyyy-MM</td>
+      <td>1</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2021-01-01-00-00-00</td>
+    </tr>
+    <tr>
+      <td>yyyy</td>
+      <td>1</td>
+      <td>2020-12-10-12-56-35</td>
+      <td>2021-01-01-00-00-00</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>所以，这种略有些逆人性的实现逻辑，真的很容易踩坑。</p>
 
 <p>但是说到底还是对log4j2切分策略不够熟悉，导致使用上有所偏差。</p>
 
-<p>等后面有空，再对log4j2的disruptor使用进行详细总结~</p>
+<p>等后面有空，再对log4j2的disruptor使用也进行详细总结~</p>
 
 
             <div>

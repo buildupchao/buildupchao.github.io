@@ -11,7 +11,7 @@
 	
     
 	{
-		"title" : "Log4j2日志滚动策略的魔鬼槽点 - java_log4j2",
+		"title" : "Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点 - java_log4j2",
 		"url" : "/java/2020/12/08/how-log4j2-split-log-cause.html"
 	}
 	
