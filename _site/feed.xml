@@ -3,10 +3,10 @@
   <channel>
     <title>buildupchao | 各自努力 | 顶峰相见</title>
     <description>本站是buildupchao的技术分享博客。</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Dec 2020 19:51:38 +0800</pubDate>
-    <lastBuildDate>Thu, 10 Dec 2020 19:51:38 +0800</lastBuildDate>
+    <link>http://www.buildupchao.cn/</link>
+    <atom:link href="http://www.buildupchao.cn/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 13 Jan 2021 12:37:56 +0800</pubDate>
+    <lastBuildDate>Wed, 13 Jan 2021 12:37:56 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -119,8 +119,8 @@
 说了这么多，其实只是想表达一个点：多思考，多复盘，多反思，跳出极限。&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</link>
-        <guid isPermaLink="true">http://localhost:4000/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</guid>
+        <link>http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</guid>
         
         <category>tech-talking</category>
         
@@ -247,8 +247,8 @@
 &lt;p&gt;等后面有空，再对log4j2的disruptor使用也进行详细总结~&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2020/12/08/how-log4j2-split-log-cause.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2020/12/08/how-log4j2-split-log-cause.html</guid>
+        <link>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</guid>
         
         <category>java</category>
         
@@ -266,8 +266,8 @@
 &lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/Flume-Log4j2-split-log-logic-open.png?raw=true&quot; alt=&quot;log4j2日志切分流程图&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 07 Dec 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2020/12/07/how-log4j2-split-log.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2020/12/07/how-log4j2-split-log.html</guid>
+        <link>http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</guid>
         
         <category>java</category>
         
@@ -283,8 +283,8 @@
         <description>
 </description>
         <pubDate>Mon, 09 Nov 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flume/2020/11/09/flume-performance-optimize-3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flume/2020/11/09/flume-performance-optimize-3.html</guid>
+        <link>http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</guid>
         
         <category>flume</category>
         
@@ -302,8 +302,8 @@
         <description>
 </description>
         <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flume/2020/11/08/flume-performance-optimize-2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flume/2020/11/08/flume-performance-optimize-2.html</guid>
+        <link>http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</guid>
         
         <category>flume</category>
         
@@ -321,8 +321,8 @@
         <description>
 </description>
         <pubDate>Sat, 07 Nov 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flume/2020/11/07/flume-performance-optimize-1.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flume/2020/11/07/flume-performance-optimize-1.html</guid>
+        <link>http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</guid>
         
         <category>flume</category>
         
@@ -384,8 +384,8 @@
 &lt;p&gt;“往往魔鬼总在细节中”。千里之堤毁于蚁穴，希望我们都能够引以为戒！&lt;/p&gt;
 </description>
         <pubDate>Mon, 20 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</guid>
+        <link>http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</guid>
         
         <category>mysql</category>
         
@@ -415,8 +415,8 @@
 &lt;p&gt;普通应用里面，只需引入这个简单的jar包，仅仅36KB，就可以方便快捷的实现cron方式执行任务。&lt;/p&gt;
 </description>
         <pubDate>Tue, 17 Mar 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2020/03/17/normal-java-cron-task.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2020/03/17/normal-java-cron-task.html</guid>
+        <link>http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</guid>
         
         <category>java</category>
         
@@ -479,8 +479,8 @@
 在这里我也只是抛砖引玉，有兴趣的话，可以自己尝试去分析下&lt;code&gt;Executors.new&lt;/code&gt;的另外几种方式又会存在哪些潜在风险呢？&lt;/p&gt;
 </description>
         <pubDate>Mon, 17 Feb 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2020/02/17/why-donot-use-Executors.new.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2020/02/17/why-donot-use-Executors.new.html</guid>
+        <link>http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</guid>
         
         <category>java</category>
         
@@ -498,8 +498,8 @@
         <description>
 </description>
         <pubDate>Thu, 16 Jan 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</guid>
+        <link>http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</guid>
         
         <category>Flink</category>
         
