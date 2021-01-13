@@ -1,0 +1,3927 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title>buildupchao | 各自努力 | 顶峰相见</title>
+    <meta name="keywords" content="buildupchao,buildupchao.cn,Spring,架构,大数据,Java,Hadoop,Spark,数据仓库,大数据平台">
+    <meta name="description"
+          content="本站是buildupchao的技术分享博客。">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/page3/">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+    <link rel="stylesheet" href="/assets/css/index.css">
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-popular-repo.css">
+    
+
+    <!-- CSS set in layout -->
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron">
+    <div class="container">
+        <h1>Youth means limitless posibilities.</h1>
+        <div id="jumbotron-meta-info">
+             
+        </div>
+    </div>
+</section>
+<section class="content container">
+
+    <div class="row">
+
+        <!-- Post List -->
+        <div class="col-md-9">
+
+            <ol class="post-list">
+                
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/onlinetroubleshooting">线上问题排查集锦</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/onlinetroubleshooting/2019/10/22/escheduler-task-scheduling-delay-for-one-hour.html">EasyScheduler线上任务调度延迟1小时问题排查</a>
+                        </h2>
+                        <p class="post-list-description">
+                            一、背景
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/10/22
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/onlinetroubleshooting">线上问题排查集锦</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/onlinetroubleshooting/2019/10/09/escheduler-upgrading-v11-cannot-schedule-task.html">为何EasyScheduler升级v1.1.0后定时任务不调度执行？</a>
+                        </h2>
+                        <p class="post-list-description">
+                            一、背景
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/10/09
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/yearlysummary">年度总结规划</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/yearlysummary/2019/08/02/we-are-in-the-past-at-last.html">年中总结之最后我们都成为了过往</a>
+                        </h2>
+                        <p class="post-list-description">
+                            “听见，冬天的离开。我在某年某月醒过来，我想、我等、我期待，未来却不能因此安排。” — 遇见
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/08/02
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/installtutorial">安装教程</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/installtutorial/2019/07/16/install-mysql-for-linux-error.html">Linux安装MySQL报libc.so.6(GLIBC_2.17)(64bit)错误</a>
+                        </h2>
+                        <p class="post-list-description">
+                            今天临时需要在某台Linux云主机上安装一下MySQL Client用于远程连接RDS，结果通过yum快速安装MySQL时出现如下问题：
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/07/16
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/tech-talking">技术杂谈</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/tech-talking/2019/07/10/tech-ebook-sharing.html">京东大数据技术白皮书下载分享</a>
+                        </h2>
+                        <p class="post-list-description">
+                            京东大数据技术白皮书
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/07/10
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/tech-talking">技术杂谈</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/tech-talking/2019/07/06/saying-manipulate-script-technology-significance.html">论掌握一项脚本技术的必要性</a>
+                        </h2>
+                        <p class="post-list-description">
+                            工作过程中，我们常常需要对一些我们可能会临时需要的数据进行清洗或者格式化等处理。这个时候就需要借助于一些奇淫技巧或者一些工具，诸如Windows平台下的notepad++，Mac/Linux平台下的vim等。
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/07/06
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/java">Java</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/java/2019/06/27/maven-package-specify-main-class.html">maven打包指定main-class</a>
+                        </h2>
+                        <p class="post-list-description">
+                            maven打包时候指定运行主类，pom.xml配置如下：
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/06/27
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/bigdataplatform">大数据平台</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/bigdataplatform/2019/06/13/airflow-install-tutorial.html">Airflow[v1.10]任务调度平台的安装教程</a>
+                        </h2>
+                        <p class="post-list-description">
+                            
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/06/13
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/datawarehouse">数据仓库</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/datawarehouse/2019/06/11/dw-apply-to-realtime-app.html">数仓实时场景的应用</a>
+                        </h2>
+                        <p class="post-list-description">
+                            数仓实时场景的应用
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/06/11
+                        </p>
+                    </li>
+                  
+                
+                 
+                    <li class="post-list-item">
+                        
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                              <a class="label label-important" style="background: #D9534F;position: relative;font-size: 14px;" href="/category/datawarehouse">数据仓库</a><span class="arrow-right" style="content:''; position: absolute; top: 33px; border: 8px solid transparent; border-left: 12px solid #D9534F;"></span>
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                            
+                          
+                        
+                        <h2 class="post-list-title">
+                            <a class="hvr-underline-from-center" href="http://www.buildupchao.cn/datawarehouse/2019/06/08/dw-ER-modeling-and-apply.html">如何对数仓进行建模</a>
+                        </h2>
+                        <p class="post-list-description">
+                            1.数仓建模First Blood
+                        </p>
+                        <p class="post-list-meta">
+                            <span class="octicon octicon-calendar"></span> 2019/06/08
+                        </p>
+                    </li>
+                  
+                
+            </ol>
+
+            <!-- Pagination -->
+            
+<div class="pagination text-align">
+    <div class="btn-group">
+
+        
+        
+        <a href="/page2" class="btn btn-outline">&laquo;</a>
+        
+        
+
+        
+        <a href="/" class="btn btn-outline">1</a>
+        
+
+        
+        
+        <a href="/page2" class="btn btn-outline">2</a>
+        
+        
+        
+        <a href="javascript:;" class="active btn btn-outline">3</a>
+        
+        
+        
+        <a href="/page4" class="btn btn-outline">4</a>
+        
+        
+        
+        <a href="/page5" class="btn btn-outline">5</a>
+        
+        
+        
+        <a href="/page6" class="btn btn-outline">6</a>
+        
+        
+        
+        <a href="/page7" class="btn btn-outline">7</a>
+        
+        
+
+        
+        <a href="/page4" class="btn btn-outline">&raquo;</a>
+        
+
+    </div>
+</div>
+
+
+
+        </div>
+
+        <div class="col-md-3" style="border-radius: 6px;">
+            <div class="card text-center">
+    <ul class="list-inline" style="margin-left:0;padding-top:8px;">
+     <li>
+        <a target="_blank" href="https://github.com/buildupchao">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="https://www.zhihu.com/people/zychao">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa  fa-stack-1x fa-inverse">知</i>
+          </span>
+        </a>
+      </li>
+       <li>
+        <a target="_blank" href="https://weibo.com/buildupchao">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+      </li>
+  </ul>
+</div>
+
+<!-- 本站汇总 -->
+<div class="card text-center" style="border-radius: 4px; overflow: hidden;">
+    <ul class="list-group">
+        <li class="list-group-item col-xs-4" style="border:0;margin: 0px 2px 0px 4px;">
+            <div style="color:#aaa;font-size:22px;">69</div>
+            <div style="color:#aaa;margin-bottom:2px;font-size:16px;">文章</div>
+        </li>
+        <li class="list-group-item col-xs-4" style="border:0;margin: 0px 2px 0px 4px;">
+          
+          
+          <div style="color:#aaa;font-size:22px;">62</div>
+          <div style="color:#aaa;margin-bottom:2px;font-size:16px;">标签</div>
+        </li>
+    </ul>
+</div>
+
+<!-- 精选文章 -->
+<!-- <h3 class="sidebar-title">精选文章</h3>
+
+
+<div class="card text-center">
+    <div class="thumbnail">
+        <div class="card-image geopattern" data-pattern-id="架构师成长之路">
+            <div class="card-image-cell">
+                <h3 class="card-title">
+                    <a href="/arch.html" target="_blank">架构师成长之路</a>
+                </h3>
+            </div>
+        </div>
+        <div class="caption">
+            <div class="card-description">
+                <p class="card-text">滴水穿石,积水成河</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center">
+    <div class="thumbnail">
+        <div class="card-image geopattern" data-pattern-id="Java的觉醒之路">
+            <div class="card-image-cell">
+                <h3 class="card-title">
+                    <a href="/java.html" target="_blank">Java的觉醒之路</a>
+                </h3>
+            </div>
+        </div>
+        <div class="caption">
+            <div class="card-description">
+                <p class="card-text">Java觉醒之路之步步高升</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center">
+    <div class="thumbnail">
+        <div class="card-image geopattern" data-pattern-id="大数据之路">
+            <div class="card-image-cell">
+                <h3 class="card-title">
+                    <a href="/bigdata.html" target="_blank">大数据之路</a>
+                </h3>
+            </div>
+        </div>
+        <div class="caption">
+            <div class="card-description">
+                <p class="card-text">大数据学习记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+<!-- 开源软件 -->
+<!-- <br/> -->
+<!-- | limit: site.side_bar_repo_limit -->
+<!-- <h3 class="sidebar-title">开源软件</h3>
+
+
+ -->
+
+<!-- 最新文章 -->
+<br/>
+<h4 class="sidebar-title" style="text-align: left;">近期文章</h4>
+
+<div class="card" style="border-radius: 4px; overflow: hidden;">
+    <ul class="list-group">
+        
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <p style="color:#009688;margin-bottom:2px;font-size:13px;">
+                <a href="/category/tech-talking" target="_blank" style="text-decoration:none;color:#009688;">技术杂谈</a>
+              </p>
+              <h4 class="card-title" style="margin-top:0px;margin-bottom:2px;font-size:15px;">
+                  <a href="/tech-talking/2020/12/08/what-do-we-lack-of-ability.html" target="_blank" style="text-decoration:none;color:#565a5f;">在大数据时代，我们缺乏的到底是思维还是能力？</a>
+              </h4>
+              <p style="color:#aaa;font-size:13px;">2020/12/08</p>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      
+          
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <p style="color:#009688;margin-bottom:2px;font-size:13px;">
+                <a href="/category/java" target="_blank" style="text-decoration:none;color:#009688;">Java</a>
+              </p>
+              <h4 class="card-title" style="margin-top:0px;margin-bottom:2px;font-size:15px;">
+                  <a href="/java/2020/12/08/how-log4j2-split-log-cause.html" target="_blank" style="text-decoration:none;color:#565a5f;">Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点</a>
+              </h4>
+              <p style="color:#aaa;font-size:13px;">2020/12/08</p>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      
+          
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <p style="color:#009688;margin-bottom:2px;font-size:13px;">
+                <a href="/category/java" target="_blank" style="text-decoration:none;color:#009688;">Java</a>
+              </p>
+              <h4 class="card-title" style="margin-top:0px;margin-bottom:2px;font-size:15px;">
+                  <a href="/java/2020/12/07/how-log4j2-split-log.html" target="_blank" style="text-decoration:none;color:#565a5f;">Log4j2是如何切分日志的呢？</a>
+              </h4>
+              <p style="color:#aaa;font-size:13px;">2020/12/07</p>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <p style="color:#009688;margin-bottom:2px;font-size:13px;">
+                <a href="/category/flume" target="_blank" style="text-decoration:none;color:#009688;">Flume</a>
+              </p>
+              <h4 class="card-title" style="margin-top:0px;margin-bottom:2px;font-size:15px;">
+                  <a href="/flume/2020/11/09/flume-performance-optimize-3.html" target="_blank" style="text-decoration:none;color:#565a5f;">数仓采集之Flume改造二三事（三）</a>
+              </h4>
+              <p style="color:#aaa;font-size:13px;">2020/11/09</p>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <p style="color:#009688;margin-bottom:2px;font-size:13px;">
+                <a href="/category/flume" target="_blank" style="text-decoration:none;color:#009688;">Flume</a>
+              </p>
+              <h4 class="card-title" style="margin-top:0px;margin-bottom:2px;font-size:15px;">
+                  <a href="/flume/2020/11/08/flume-performance-optimize-2.html" target="_blank" style="text-decoration:none;color:#565a5f;">数仓采集之Flume改造二三事（二）</a>
+              </h4>
+              <p style="color:#aaa;font-size:13px;">2020/11/08</p>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      
+    </ul>
+</div>
+
+<!-- 分类目录 -->
+<br/>
+<h4 class="sidebar-title" style="text-align: left;">分类目录</h4>
+
+<div class="card" style="border-radius: 4px; overflow: hidden;">
+    <ul class="list-group">
+      
+      
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/java" target="_blank" style="text-decoration:none;color:#009688;">Java&nbsp;<span style="color: #C1BBC9;">(17)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/flink" target="_blank" style="text-decoration:none;color:#009688;">Flink&nbsp;<span style="color: #C1BBC9;">(3)</span></a>
+              </span>
+          </li>
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/spark" target="_blank" style="text-decoration:none;color:#009688;">Spark&nbsp;<span style="color: #C1BBC9;">(3)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/hadoop" target="_blank" style="text-decoration:none;color:#009688;">Hadoop&nbsp;<span style="color: #C1BBC9;">(1)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/hive" target="_blank" style="text-decoration:none;color:#009688;">Hive&nbsp;<span style="color: #C1BBC9;">(1)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/flume" target="_blank" style="text-decoration:none;color:#009688;">Flume&nbsp;<span style="color: #C1BBC9;">(4)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/redis" target="_blank" style="text-decoration:none;color:#009688;">Redis&nbsp;<span style="color: #C1BBC9;">(1)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/datawarehouse" target="_blank" style="text-decoration:none;color:#009688;">数据仓库&nbsp;<span style="color: #C1BBC9;">(5)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/bigdataplatform" target="_blank" style="text-decoration:none;color:#009688;">大数据平台&nbsp;<span style="color: #C1BBC9;">(3)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/datastructureandalgo" target="_blank" style="text-decoration:none;color:#009688;">数据结构与算法&nbsp;<span style="color: #C1BBC9;">(2)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/arch" target="_blank" style="text-decoration:none;color:#009688;">架构设计&nbsp;<span style="color: #C1BBC9;">(2)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/installtutorial" target="_blank" style="text-decoration:none;color:#009688;">安装教程&nbsp;<span style="color: #C1BBC9;">(3)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/db" target="_blank" style="text-decoration:none;color:#009688;">数据库&nbsp;<span style="color: #C1BBC9;">(2)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/yearlysummary" target="_blank" style="text-decoration:none;color:#009688;">年度总结规划&nbsp;<span style="color: #C1BBC9;">(4)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/onlinetroubleshooting" target="_blank" style="text-decoration:none;color:#009688;">线上问题排查集锦&nbsp;<span style="color: #C1BBC9;">(7)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/tech-talking" target="_blank" style="text-decoration:none;color:#009688;">技术杂谈&nbsp;<span style="color: #C1BBC9;">(3)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/technology-challenge" target="_blank" style="text-decoration:none;color:#009688;">技术挑战&nbsp;<span style="color: #C1BBC9;">(2)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/thought-line" target="_blank" style="text-decoration:none;color:#009688;">思绪感悟&nbsp;<span style="color: #C1BBC9;">(1)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="/category/latestreading" target="_blank" style="text-decoration:none;color:#009688;">书籍阅读&nbsp;<span style="color: #C1BBC9;">(2)</span></a>
+              </span>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+    </ul>
+</div>
+
+<!-- 文章标签 -->
+<br style="clear:both;" />
+<h4 class="sidebar-title" style="text-align: left;">友情链接</h4>
+<div class="card" style="border-radius: 4px; overflow: hidden;">
+    <ul class="list-group">
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="https://coolshell.cn/" target="_blank" style="text-decoration:none;color:#009688;">酷壳</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="http://www.ityouknow.com/" target="_blank" style="text-decoration:none;color:#009688;">纯洁的微笑</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="http://www.iocoder.cn/" target="_blank" style="text-decoration:none;color:#009688;">芋道源码</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="https://blog.csdn.net/shenjian58/article/details/89849328" target="_blank" style="text-decoration:none;color:#009688;">架构师之路</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="https://blog.csdn.net/rickiyeat" target="_blank" style="text-decoration:none;color:#009688;">rickiyeat的博客</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="http://lxw1234.com/" target="_blank" style="text-decoration:none;color:#009688;">lxw的大数据田地</a>
+              </span>
+          </li>
+        
+          <li class="list-group-item col-xs-12" style="border:0;margin: 0px 2px 0px 4px;">
+              <span class="card-title" style="margin-top: 0px; margin-bottom:0px;font-size:16px;">
+                  <a href="http://dongxicheng.org/" target="_blank" style="text-decoration:none;color:#009688;">董的博客</a>
+              </span>
+          </li>
+        
+    </ul>
+</div>
+
+<!-- 留言小本 -->
+<br/>
+<h4 class="sidebar-title" style="text-align: left;">留言小本</h4>
+<!-- Comments -->
+<div class="card comment">
+ 
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/page3/'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+</div>
+
+<!-- 文章标签 -->
+<!-- <br/>
+<h3 class="sidebar-title">文章标签</h3>
+
+<div class="card" style="border-radius: 4px; border: 1px solid #ddd; overflow: hidden;">
+    <ul class="list-group">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #C99D70;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/linux" target="_blank">Linux&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #C99D70;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/mysql" target="_blank">MySQL&nbsp;(4)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/安装教程" target="_blank">安装教程&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/java" target="_blank">Java&nbsp;(22)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/软件开发回顾总结" target="_blank">软件开发回顾总结&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/数据库" target="_blank">数据库&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/大数据" target="_blank">大数据&nbsp;(23)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/flume" target="_blank">Flume&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/hive" target="_blank">Hive&nbsp;(5)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/latestreading" target="_blank">书籍阅读&nbsp;(2)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/java" target="_blank">Java&nbsp;(6)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/spark" target="_blank">Spark&nbsp;(3)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/spark streaming" target="_blank">Spark Streaming&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/数据结构" target="_blank">数据结构&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #CA70FF;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/算法" target="_blank">算法&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/hadoop" target="_blank">Hadoop&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/年度复盘" target="_blank">年度复盘&nbsp;(3)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #C99D70;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/年度规划" target="_blank">年度规划&nbsp;(4)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/总结" target="_blank">总结&nbsp;(3)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #E48683;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/redis" target="_blank">Redis&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/缓存设计" target="_blank">缓存设计&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/outofmemoryerror" target="_blank">OutOfMemoryError&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/oom" target="_blank">OOM&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/线上问题排查" target="_blank">线上问题排查&nbsp;(6)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #CA70FF;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/hive数据倾斜" target="_blank">Hive数据倾斜&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #C99D70;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/groupby key" target="_blank">Groupby Key&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/map side join" target="_blank">map side join&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/count distinct" target="_blank">count distinct&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/钩子函数" target="_blank">钩子函数&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/保存数据现场" target="_blank">保存数据现场&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #E48683;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/addshutdownhook" target="_blank">addShutdownHook&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/rpc" target="_blank">RPC&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/框架设计" target="_blank">框架设计&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/countdownlatch" target="_blank">CountDownLatch&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/python" target="_blank">Python&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #CA70FF;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/负载均衡算法" target="_blank">负载均衡算法&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/hql查询效率" target="_blank">HQL查询效率&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/analyze table" target="_blank">Analyze Table&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/数据仓库" target="_blank">数据仓库&nbsp;(5)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/dw" target="_blank">DW&nbsp;(4)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #CA70FF;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/大数据平台" target="_blank">大数据平台&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/airflow" target="_blank">Airflow&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #8DCD8D;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/arthas" target="_blank">Arthas&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/诊断利器" target="_blank">诊断利器&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/tech-talking" target="_blank">技术杂谈&nbsp;(5)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/easyscheduler" target="_blank">EasyScheduler&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/thought-line" target="_blank">思绪感悟&nbsp;(1)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/technology-challenge" target="_blank">技术挑战&nbsp;(2)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/nacos" target="_blank">Nacos&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/2020" target="_blank">2020&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/flink" target="_blank">Flink&nbsp;(3)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #5BBDAB;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/redo-log" target="_blank">redo-log&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #C99D70;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/threadpool" target="_blank">threadpool&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/executors" target="_blank">Executors&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/cron" target="_blank">cron&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #00A67C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/mysql" target="_blank">mysql&nbsp;(1)</a>
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/db" target="_blank">数据库&nbsp;(1)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #88A4B4;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/flume" target="_blank">Flume&nbsp;(3)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/bigdata" target="_blank">大数据&nbsp;(3)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #FF944C;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    
+                      
+                    
+                      
+                    
+                      
+                        <a style="color: #FCF2F1;" href="/tag/datawarehouse" target="_blank">数据仓库&nbsp;(3)</a>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                  
+              </h5>
+          </li>
+      
+      
+      
+      
+      
+      
+          <li class="list-group-item col-xs-6" style="margin: 2px 2px 2px 4px; width: 48%; background: #808080;">
+              <h5 class="card-title" style="margin:0;">
+                  
+                    <a style="color: #FCF2F1;" href="/tag/log4j2" target="_blank">log4j2&nbsp;(2)</a>
+                  
+              </h5>
+          </li>
+      
+    </ul>
+</div> -->
+
+<!-- 友情链接 -->
+<!-- <br style="clear:both;" /> -->
+<!-- <h3 class="sidebar-title">友情链接</h3>
+
+<div class="card text-center">
+    <ul class="list-group">
+      
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="https://coolshell.cn/" target="_blank">酷壳</a>
+              </h4>
+              <p>左耳听风</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="http://www.ityouknow.com/" target="_blank">纯洁的微笑</a>
+              </h4>
+              <p>个人独立博客, Spring Boot/Spring Cloud</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="http://www.iocoder.cn/" target="_blank">芋道源码</a>
+              </h4>
+              <p>纯源码解析博客</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="https://blog.csdn.net/shenjian58/article/details/89849328" target="_blank">架构师之路</a>
+              </h4>
+              <p>架构师之路精选100篇</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="https://blog.csdn.net/rickiyeat" target="_blank">rickiyeat的博客</a>
+              </h4>
+              <p>hadoop、spring boot/cloud技术博客</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="http://lxw1234.com/" target="_blank">lxw的大数据田地</a>
+              </h4>
+              <p>Hadoop/Hive/HBase/Spark/Java</p>
+          </li>
+      
+          <li class="list-group-item">
+              <h4 class="card-title">
+                  <a href="http://dongxicheng.org/" target="_blank">董的博客</a>
+              </h4>
+              <p>大数据相关</p>
+          </li>
+      
+    </ul>
+</div> -->
+
+<script>
+    $(document).ready(function(){
+
+        // Enable bootstrap tooltip
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+        </div>
+
+    </div>
+
+</section>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>

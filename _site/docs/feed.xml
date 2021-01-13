@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>buildupchao | 各自努力 | 顶峰相见</title>
+    <description>本站是buildupchao的技术分享博客。</description>
+    <link>http://www.buildupchao.cn/</link>
+    <atom:link href="http://www.buildupchao.cn/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 13 Jan 2021 12:41:29 +0800</pubDate>
+    <lastBuildDate>Wed, 13 Jan 2021 12:41:29 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>在大数据时代，我们缺乏的到底是思维还是能力？</title>
+        <description>&lt;p&gt;大学最重要的事情应该是锻炼自学的能力、培养自律的心性。
+&lt;br /&gt;&lt;br /&gt;
+工作后，最重要的事情应该是执行力MAX的可靠性以及严谨处事的态度。
+&lt;br /&gt;&lt;br /&gt;
+似乎每件事都会有专门的目标性。
+&lt;br /&gt;&lt;br /&gt;
+然而，工作久了，难免会&lt;strong style=&quot;color:red;&quot;&gt;“学会偷懒”&lt;/strong&gt;，不再像从前哐哧哐哧就开始无想法的行动。&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;1按部就班固化思维&quot;&gt;1.按部就班固化思维&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong style=&quot;color:blue;&quot;&gt;在遇到采集数据异常排查问题时，W总是习惯于从文件系统拉取log日志进行查询，然而采集机器数少则十几台，多则成百上千&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;不是吧不是吧，这种耗时费力的事情，不会真的有人这么干吧？&lt;/li&gt;
+      &lt;li&gt;想必除了想要摸鱼的人，不会有人傻到大批量拉取日志进行分析。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;正解：可以借助于Hive or Flink集群建表SQL分析，效率更高。（ 当然，有更方便快捷的方式欢迎推荐。）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2从零造轮子为哪般&quot;&gt;2.从零造轮子为哪般&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong style=&quot;color:blue;&quot;&gt;有工具可以辅助快速解决问题，然而经常习惯于自己从零造轮子？&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;没错，说的就是你，有极速模式，为何要采用常规流程模式呢？难道是不想有自己的空闲时间充电学习？&lt;/li&gt;
+      &lt;li&gt;难道说你是在故意放松，给你拖延工作量，从而有时间跳槽走位？？？
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;正解：我们可以学习架构原理，运用思维，发散学习。（比如二叉树的中序遍历可以运用到自助式ETL中的表达式聚合计算中）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;3架构缺陷补丁不断&quot;&gt;3.架构缺陷补丁不断&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong style=&quot;color:blue;&quot;&gt;小文件合并功能，采用单纯的JAVA服务自己实现，每天平均有80W+的小文件合并任务量？？？&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;如果数据都是存储在HDFS上的，那么你的NameNode压力是要多大啊？&lt;/li&gt;
+      &lt;li&gt;大量小文件问题根本原因还是架构设计有问题，如果日志切分合理，小文件量是极其少的。&lt;/li&gt;
+      &lt;li&gt;所以，你的工作量就是自己造就了架构问题，然后在此基础之上再开发一套服务来做小日志文件归并？别人从复杂入简，而你是从简单到复杂。（莫非你是安琪拉？要&lt;strong style=&quot;color:red;&quot;&gt;“缝缝补补又是一年？”&lt;/strong&gt;）&lt;/li&gt;
+      &lt;li&gt;那么，你的思维是什么？是为了彰显你的研发能力以及代码量而生的吗？
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;正解：敢于推倒架构设计，架构师不是神人，也会有架构漏洞以及不足点，要以发展眼光看待问题，而不是尊崇。（毕竟活在前人阴影下很累。）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;4人云亦云普度众生&quot;&gt;4.人云亦云普度众生&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong style=&quot;color:blue;&quot;&gt;人云亦云，技术选型从来都是拍脑袋 or 看了几篇博客？？？&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;不经大脑思考或者浅尝辄止就自认为了如指掌某门技术？是骡子是马敢拉出来溜溜吗？走两步？&lt;/li&gt;
+      &lt;li&gt;人云亦云？如果没有自己想法就坦言，慢慢培养自己的意识，而不是随声附和。（&lt;strong style=&quot;color:red;&quot;&gt;要有对外我是“辅助位”，对内深藏不露。&lt;/strong&gt;）&lt;/li&gt;
+      &lt;li&gt;张口就来？这个用Flink？这个用Clickhouse？这个用RabbitMQ？你调研了吗？有数据依据吗？请发出来你的测试报告以及数据凭证。
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;正解：往往最站不住脚的是空口无凭。聪明的人，会直接发出上帝之手（有数据+测试报告），让你无力反驳。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;5如法炮制乐此不疲&quot;&gt;5.如法炮制乐此不疲&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong style=&quot;color:blue;&quot;&gt;经常会遇到一类人，总喜欢如法炮制，一个方案解万千难题。&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;你可否考虑过在同一套架构模式下，前后二者数据量级 or 数据埋点相关的差距？&lt;/li&gt;
+      &lt;li&gt;你可否考虑过在同一套代码逻辑下，前后二者producer-consumer部署方案不同会有所差别？&lt;/li&gt;
+      &lt;li&gt;你可否考虑过在用一个HQL ETL问题时，前后时间跨度已经截然不同（一年前和一年后数据量差距有多大？dt范围有多大？）？
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;正解：世间没有银弹。我们总是习惯于如法炮制，一套方法冠以多用，但是往往得不偿失。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;
+说了这么多，其实只是想表达一个点：多思考，多复盘，多反思，跳出极限。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</guid>
+        
+        <category>tech-talking</category>
+        
+        
+        <category>tech-talking</category>
+        
+      </item>
+    
+      <item>
+        <title>Log4j2日志滚动策略TimeBasedTriggeringPolicy的魔鬼槽点</title>
+        <description>&lt;p&gt;&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;参数说明：&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;参数名称&lt;/th&gt;
+      &lt;th&gt;类型&lt;/th&gt;
+      &lt;th&gt;描述&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interval&lt;/td&gt;
+      &lt;td&gt;integer&lt;/td&gt;
+      &lt;td&gt;根据日期格式中最具体的时间单位来决定应该多久发生一次rollover。例如，在日期模式中小时为具体的时间单位，那么每4小时会发生4次rollover，默认值为1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;modulate&lt;/td&gt;
+      &lt;td&gt;boolean&lt;/td&gt;
+      &lt;td&gt;表示是否调整时间间隔以使在时间间隔边界发生下一个rollover。例如：假设小时为具体的时间单元，当前时间为上午3点，时间间隔为4，第一次发送rollover是在上午4点，接下来是上午8点，接着是中午，接着是下午4点等发生。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;由上图我们展开两个测试用例：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;case 1：如何实现天粒度切分日志？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/day_split.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;case 2: 如何实现小时粒度（基于秒）切分日志？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/seconds_split.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以，log4j2中&lt;code&gt;TimeBasedTriggeringPolicy&lt;/code&gt;切分文件策略，是基于filePattern中的&lt;code&gt;%d{yyyy-MM-dd-HH-mm-ss}&lt;/code&gt;来决定到底采用哪种时间单位（天、小时、分钟、秒等）。&lt;/p&gt;
+
+&lt;p&gt;那上面两种方式有没有错误呢？？？逻辑上没问题，但是case 2却没有达到我们想要的，我们其实是想要达到凌晨0点切分时间的（而不是推延24小时）。&lt;/p&gt;
+
+&lt;p&gt;我们已经指定了 &lt;code&gt;modulus&lt;/code&gt; （modulus就是modulate）为true，应该以0点自动校准进行文件切分时间规划的，然而，当我们设置了86400秒（也就是24小时）一切分的时候，却没有达到0点切分的目的，而是项目启动的当前时间推算24小时，这是为什么呢？&lt;/p&gt;
+
+&lt;p&gt;我们再来看下Log4j2基于时间切分逻辑底层&lt;code&gt;org.apache.logging.log4j.core.appender.rolling.PatternProcessor&lt;/code&gt;判断逻辑(部分截图)：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-1.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们再进入&lt;code&gt;increment&lt;/code&gt;函数查看下实现：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/PatternProcessor-3.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;哦~原来如此，当我们指定了&lt;code&gt;modulus&lt;/code&gt;时，它是根据我们的filePattern最后一位为基准0进行推延计算的。&lt;/p&gt;
+
+&lt;p&gt;也就是说，我们可以得出来如下的表格：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;filePattern&lt;/th&gt;
+      &lt;th&gt;increment&lt;/th&gt;
+      &lt;th&gt;prevFileTime（采用非时间戳方式表示）&lt;/th&gt;
+      &lt;th&gt;nextFileTime（采用非时间戳方式表示）&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH-mm-ss&lt;/td&gt;
+      &lt;td&gt;7200&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-56-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH-mm&lt;/td&gt;
+      &lt;td&gt;120&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd-HH&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-10-14-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM-dd&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2020-12-11-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy-MM&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2021-01-01-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;yyyy&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2020-12-10-12-56-35&lt;/td&gt;
+      &lt;td&gt;2021-01-01-00-00-00&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;所以，这种略有些逆人性的实现逻辑，真的很容易踩坑。&lt;/p&gt;
+
+&lt;p&gt;但是说到底还是对log4j2切分策略不够熟悉，导致使用上有所偏差。&lt;/p&gt;
+
+&lt;p&gt;等后面有空，再对log4j2的disruptor使用也进行详细总结~&lt;/p&gt;
+</description>
+        <pubDate>Tue, 08 Dec 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</guid>
+        
+        <category>java</category>
+        
+        <category>log4j2</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>Log4j2是如何切分日志的呢？</title>
+        <description>&lt;p&gt;简化语言，一切用图来表达吧：&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/log4j2/Flume-Log4j2-split-log-logic-open.png?raw=true&quot; alt=&quot;log4j2日志切分流程图&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 07 Dec 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</guid>
+        
+        <category>java</category>
+        
+        <category>log4j2</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>数仓采集之Flume改造二三事（三）</title>
+        <description>
+</description>
+        <pubDate>Mon, 09 Nov 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</guid>
+        
+        <category>flume</category>
+        
+        <category>bigdata</category>
+        
+        <category>datawarehouse</category>
+        
+        
+        <category>flume</category>
+        
+      </item>
+    
+      <item>
+        <title>数仓采集之Flume改造二三事（二）</title>
+        <description>
+</description>
+        <pubDate>Sun, 08 Nov 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</guid>
+        
+        <category>flume</category>
+        
+        <category>bigdata</category>
+        
+        <category>datawarehouse</category>
+        
+        
+        <category>flume</category>
+        
+      </item>
+    
+      <item>
+        <title>数仓采集之Flume改造二三事（一）</title>
+        <description>
+</description>
+        <pubDate>Sat, 07 Nov 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</guid>
+        
+        <category>flume</category>
+        
+        <category>bigdata</category>
+        
+        <category>datawarehouse</category>
+        
+        
+        <category>flume</category>
+        
+      </item>
+    
+      <item>
+        <title>MySQL超大临时表问题回顾</title>
+        <description>&lt;h2 id=&quot;1问题背景&quot;&gt;1.问题背景&lt;/h2&gt;
+
+&lt;p&gt;近期接到运维同学反馈，数仓线上MySQL数据库产生了一个500G的临时表。500G！500G！500G！&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h2 id=&quot;2排查定位&quot;&gt;2.排查定位&lt;/h2&gt;
+
+&lt;p&gt;通过pma访问数据库实例，执行&lt;code&gt;show full processlist&lt;/code&gt;找到可疑的那个SQL（可疑查看Time字段，单位：秒）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_1.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以通过设置“选项”显示完整SQL内容：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_2.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;回到项目代码中找到产生改SQL的地方（已经针对关键部分进行伪代码改写）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SQL&quot;&gt;select distinct device as value from (select device from database_name.table_name where device &amp;lt;&amp;gt; 'your_value' and device &amp;lt;&amp;gt; '' order by date, device desc) a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong style=&quot;color:red;&quot;&gt;到这里需要说一句，该SQL寻找过程比较曲折，居然是通过String一点一点拼接的，强烈抗议！！！有ORM框架为何不用？？？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我们通过&lt;code&gt;explain&lt;/code&gt;查看执行计划来继续分析SQL：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_3.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯~的确是采用了临时表……&lt;/p&gt;
+
+&lt;p&gt;那我们把SQL改吧改吧，然后重新查看下执行计划：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/blog/db/tmp_table_4.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯，好，没有超级临时表问题了~&lt;/p&gt;
+
+&lt;h2 id=&quot;3问题复盘&quot;&gt;3.问题复盘&lt;/h2&gt;
+
+&lt;p&gt;其实这个SQL并不复杂，但是为啥之前没有暴露出来问题呢？我想原因有两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong style=&quot;color:red;&quot;&gt;数据量&lt;/strong&gt;：在数据量没有达到一定量级的时候，一些问题往往会被掩盖了，很难凸显出来，或者对系统造成毁灭性的影响；&lt;/li&gt;
+  &lt;li&gt;&lt;strong style=&quot;color:red;&quot;&gt;主动型&lt;/strong&gt;：在问题没有发生的时候，当你看到这个SQL，你是否会有改掉它的意识并且执行起来呢？？？而不是表示对前人的尊敬呢？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;“往往魔鬼总在细节中”。千里之堤毁于蚁穴，希望我们都能够引以为戒！&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</guid>
+        
+        <category>mysql</category>
+        
+        <category>java</category>
+        
+        <category>db</category>
+        
+        
+        <category>onlinetroubleshooting</category>
+        
+      </item>
+    
+      <item>
+        <title>没有Spring cron时该怎么定点执行定时任务？</title>
+        <description>&lt;p&gt;最近有个小需求，在普通Java项目里面，不能借助于Spring，也不能使用复杂的jar，来实现cron定点定时任务。&lt;br /&gt;
+通过查询资料，发现一个好用的工具：hutool&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-maven&quot; data-lang=&quot;maven&quot;&gt;&amp;lt;!-- https://mvnrepository.com/artifact/cn.hutool/hutool-cron --&amp;gt;
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;cn.hutool&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;hutool-cron&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;5.2.2&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;参考资料如下：&lt;a href=&quot;https://www.bookstack.cn/read/hutool/0f082d6e35363da6.md&quot; target=&quot;_blank&quot;&gt;https://www.bookstack.cn/read/hutool/0f082d6e35363da6.md&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;普通应用里面，只需引入这个简单的jar包，仅仅36KB，就可以方便快捷的实现cron方式执行任务。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Mar 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</guid>
+        
+        <category>java</category>
+        
+        <category>cron</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>为何不推荐直接采用 Executors.new 线程池的方式？</title>
+        <description>&lt;p&gt;众所周知，Java并发编程是一大难点所在。&lt;br /&gt;
+其实并不是我们不懂并发原理，而是我们往往忽略了细节，然而，&lt;strong style=&quot;color:red&quot;&gt;“魔鬼总在细节中”！&lt;/strong&gt;;&lt;br /&gt;
+&lt;br /&gt;
+作为以Java作为主语言的研发，应该都知道 Executors.new 各种线程池的时候（ScheduledThreadPool除外），底层都是通过 ThreadPoolExecutor来实现的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong style=&quot;color:green;&quot;&gt;[延拓]&lt;/strong&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;ThreadPoolExecutor&lt;/code&gt;的5项基本参数为：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;int corePoolSize：核心线程数&lt;/li&gt;
+  &lt;li&gt;int maximumPoolSize：线程池最大可拥有的线程数（最高并发量）&lt;/li&gt;
+  &lt;li&gt;long keepAliveTime：线程idle态的最大存留时间&lt;/li&gt;
+  &lt;li&gt;TimeUnit unit：时间单位，配合 keepAliveTime 使用&lt;/li&gt;
+  &lt;li&gt;BlockingQueue&lt;Runnable&gt; workQueue：任务队列（当任务量打满核心线程数 or 最大线程数 时，用来存放排队等待执行的任务）&lt;/Runnable&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;
+以下主要以 &lt;code&gt;Executors.newFixedThreadPool(nThreads)&lt;/code&gt;进行分析：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/concurrent/threadpool/newFixedThreadPool.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;由上图，我们可以明显得出两项信息：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;线程池中线程不会进行回收，会一直存活，即使都一直处于idle状态（因为corePoolSize和maximumPoolSize被设置为等大）&lt;/li&gt;
+  &lt;li&gt;任务队列直接采用&lt;code&gt;new LinkedBlockingQueue&amp;lt;Runnable&amp;gt;()&lt;/code&gt;方式，是无界的，也就是说任务量飙升时会存在内存溢出风险&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;那还有没有其他信息呢？？？当然！！！
+我们再来看通过&lt;code&gt;Executors.newFixedThreadPool&lt;/code&gt;方式调用&lt;code&gt;ThreadPoolExecutor&lt;/code&gt;时，存在哪些隐性操作：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/concurrent/threadpool/Executors.newFixedThreadPool.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/concurrent/threadpool/Executors.defaultThreadFactory.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;啊！！！你看，内部直接采用了&lt;code&gt;Executors.defaultThreadFactory()&lt;/code&gt;，它会做些什么？是以什么样的方式来给我们提供工作线程呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/buildupchao/ImgStore/blob/master/Java/concurrent/threadpool/DefaultThreadFactory.newThread.png?raw=true&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;发现问题严重性了吗？默认提供的工作线程均为&lt;strong style=&quot;color:red;&quot;&gt;非守护线程&lt;/strong&gt;！&lt;br /&gt;&lt;br /&gt;
+也就是说，如果一旦发生意外，主线程都已经退出了，如果此时我们因为异常而没有关闭线程池的话，进程会作为一个僵尸进程一直存在的！！！&lt;/p&gt;
+
+&lt;p&gt;这也是近期排查线上问题时，发现有些小伙伴写代码太过于随意，根本不考虑边界情况以及异常case。
+&lt;br /&gt;&lt;br /&gt;
+所以，我们平时设计并发编程，采用线程或线程池的时候，多一些思考，可能就会有不一样的结果。
+&lt;br /&gt;&lt;br /&gt;
+在这里我也只是抛砖引玉，有兴趣的话，可以自己尝试去分析下&lt;code&gt;Executors.new&lt;/code&gt;的另外几种方式又会存在哪些潜在风险呢？&lt;/p&gt;
+</description>
+        <pubDate>Mon, 17 Feb 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</guid>
+        
+        <category>java</category>
+        
+        <category>threadpool</category>
+        
+        <category>Executors</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>Flink的Watermark是如何治理数据乱序的？</title>
+        <description>
+</description>
+        <pubDate>Thu, 16 Jan 2020 00:00:00 +0800</pubDate>
+        <link>http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</link>
+        <guid isPermaLink="true">http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</guid>
+        
+        <category>Flink</category>
+        
+        <category>大数据</category>
+        
+        
+        <category>flink</category>
+        
+      </item>
+    
+  </channel>
+</rss>

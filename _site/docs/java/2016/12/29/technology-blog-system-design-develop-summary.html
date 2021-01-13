@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> 技术博客园系统开发设计总结 - buildupchao博客 </title>
+    <meta name="keywords" content="buildupchao,buildupchao.cn,Spring,架构,大数据,Java,Hadoop,Spark,数据仓库,大数据平台">
+    <meta name="description"
+          content="&lt;p&gt;经过一个月的时间，完成“技术博客园”的开发设计，在该系统开发过程中，重新领会了软件设计的思想以及软件开发的根本。
+写此博客进行总结这段时间的得失。&lt;/p&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/java/2016/12/29/technology-blog-system-design-develop-summary.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="技术博客园系统开发设计总结">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>技术博客园系统开发设计总结</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2016/12/29
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p>经过一个月的时间，完成“技术博客园”的开发设计，在该系统开发过程中，重新领会了软件设计的思想以及软件开发的根本。
+写此博客进行总结这段时间的得失。</p>
+
+<p>　  技术博客园Github链接：技术博客园</p>
+
+<p>　  技术博客园演示网站：技术博客园演示网址</p>
+
+<h2><strong>1. 技术总结，回顾过去</strong></h2>
+
+<p>　 技术博客园系统设计总结：</p>
+
+<p>　 本系统的开发，使用了BAT公司的技术解决方案，同时伴以Spring、Spring MVC和Mybatis等框架的使用，促使了本系统的快速开发。</p>
+
+<p>　 在本系统的设计过程中，主要按照以下步骤进行的设计:</p>
+
+<ul>
+  <li>
+    <p>首先进行了需求分析，并编写了相应的功能技术文档，以备后续开发工作进行时使用；</p>
+  </li>
+  <li>
+    <p>其次，针对相应的需求，进行UI草图的设计，并仔细斟酌页面布局和元素的设计；</p>
+  </li>
+  <li>
+    <p>然后，根据草图进行系统功能性模块以及系统中流动交互数据Bean的设计，在整个系统的不断迭代设计后，最终敲定了前端界面及其分割碎片、后台功能模块Controller的设计以及与数据库相对应的基本数据类Bean的设计；</p>
+  </li>
+  <li>
+    <p>接下来，才进行数据类Bean到数据库表的映射，设计出来完备稳定的数据库；</p>
+  </li>
+  <li>
+    <p>最后，进行的Controller控制层的详细设计与实现。设计期间，考虑到了系统的功能性的共用，以及设计模式（代理模式、事件-订阅模式等）的运用，真正领悟到了软件设计的核心，而不再是简简单单的遵循以往的前端界面设计、数据库设计、编写开发后台代码的长久不变的设计思想。</p>
+  </li>
+</ul>
+
+<p>     在本系统开发过程中，遇到了前端界面开发框架jQuery EasyUI的技术性问题，比如页面元素显示布局错乱，与设计不符的现象，最终通过检测调试，发现是该框架最新版本中移除了原始设计策略的缘故，成功解决该问题。其次，深刻体会到了Spring设计的优秀所在，不仅仅是最小注入式开发以及管理Controller和Service服务层API，同时把设计模式和软件体系结构进行了完美运用，这些使我领会到，大学所学知识并非全无用处，而是我忽略了它的真正价值。</p>
+
+<p>     在本系统开发完成后，进行项目总结时，发现我们总是过多的在意于开发某个项目所使用的技术，而忽略了软件设计的过程，从而使得开发的系统往往难以维护甚至稍作改动全盘皆输。其次，长期凌驾于开发框架的运用，虽然缩短了开发周期，但是，却让我们距离技术核心越来越远，最终连简单的实现一个List类、重写一个User类的hashcode和equals方法，甚至连在一个类内部通过多线程实现生产者与消费者程序都无从下手，这并不是我们想要看到的。</p>
+
+<p>     通过本系统的开发，让我领悟到万变不离其宗。作为软件开发人员，对我们来说，重要的不仅仅是技术，还有思想以及概念的见解深度。</p>
+
+<p><strong>注：博主当下是个即将毕业的大四学生（软件工程专业）。</strong></p>
+
+<h2><strong>2. 17计划，展望未来</strong></h2>
+
+<p>　  2016年，接触到很多新技术，也参与过很多项目，同时也在锻炼中不断成长。曾忙碌于“物理仿真实验系统”的flash动画的设计；也沉醉于node.js的迷人之处；也表现过对学习ios和swift的忠贞；还小试过做机器学习实战的python以及大数据的scala面向函数编程。然而，走走转转，周而复始，最终还是回到了Java Web开发，难舍难分。但是，不再是以往的思想进行开发，而是转换了一种思路，也许是见得多了，思路也就开阔了吧。于是，开始了勿忘初衷，重新审视了以往的单页Web开发技术，JavaScript的面向函数/面向对象编程，以及事件-订阅设计模式的贯穿。我很欣慰，在2016年的最后一个多内里，有我的好朋友——小黄毛的陪同，一起学习深造至今仍未离校。</p>
+
+<p>    针对即将到来的2017年，也是我的毕业年，我想，我不再需要这么的专门花大把大把的时间在技术的修炼上，我需要做的是把设计思想以及当下会的技术进行更深层次的融合、炼化，最终在灵活运用的基础上，能够达到舍我其谁！接下来，我要在保证外在技术的基础上，专注修炼内功，稳固基础，熟练掌握前后端整个设计、开发过程的融合。</p>
+
+<p>    毕业前计划:</p>
+
+<ul>
+  <li>
+    <p>在毕业前能够再次圆满完成一个更加符合软件设计思想的上线项目；</p>
+  </li>
+  <li>
+    <p>能够把设计模式以及软件体系结构灵活自如的贯穿在Java、JavaScript这些前后端开发技术中；</p>
+  </li>
+</ul>
+
+<p>- 增强自我前端审美，使自己的前端UI设计更加美观符合UX；</p>
+
+<ul>
+  <li>
+    <p>熟练掌握Spring、Spring MVC、Mybatis、Struts2开发框架；</p>
+  </li>
+  <li>
+    <p>自如融合单页Web应用中JavaScript代码和Vue.js框架；</p>
+  </li>
+  <li>
+    <p>从Mac OSX开发平台逐步转至Linux开发平台；</p>
+  </li>
+  <li>
+    <p>学习Redis缓存技术。</p>
+  </li>
+</ul>
+
+<p>     在接下来，我一定认真安排，使自己的计划圆满完成！</p>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/db/2017/08/16/mysql-force-index.html" rel="prev">MySQL如何实现强制查询走索引和强制查询不缓存</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/java/2016/12/20/how-to-realize-sqrt-func-using-java.html" rel="next">Java不使用Math.sqrt方法实现的求平方根</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/java/2016/12/29/technology-blog-system-design-develop-summary.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>

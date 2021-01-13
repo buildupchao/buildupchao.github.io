@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> 了解一下数据仓库 - buildupchao博客 </title>
+    <meta name="keywords" content="数据仓库,DW,数据仓库建模">
+    <meta name="description"
+          content="&lt;h2 id=&quot;0什么是数据库&quot;&gt;0.什么是数据库？&lt;/h2&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/datawarehouse/2019/05/20/dw-conception-and-ER-entity-model.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="了解一下数据仓库">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>了解一下数据仓库</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2019/05/20
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <h2 id="0什么是数据库">0.什么是数据库？</h2>
+
+<ul>
+  <li>
+    <p>数据库（DB）是按照<strong style="color:red;">数据结构</strong>来<strong style="color:red;">组织、存储和管理</strong>数据的建立在<strong style="color:red;">计算机</strong>存储设备上的仓库</p>
+  </li>
+  <li>
+    <p>数据库是长期存储在<strong style="color:red;">计算机内、有组织的、可共享的数据集合。</strong>数据库中的数据指的是以一定的数据模型组织、描述和储存在一起、具有尽可能小的冗余度、较高的数据独立性和易扩展性的特点并可在一定范围内为多个用户共享</p>
+  </li>
+</ul>
+
+<h2 id="1什么是数据仓库">1.什么是数据仓库？</h2>
+
+<p>数据仓库是面向主题的，集成的，相对稳定的，反映历史变化的数据集合，用于支持管理决策。</p>
+
+<ul>
+  <li>
+    <p>面向主题：在较高层次上将企业信息系统的数据综合归并进行分析利用的抽象的概念。每个主题基本上对应一个相应的分析领域。</p>
+  </li>
+  <li>
+    <p>集成的：企业级数据，同时数据要保持一致性、完整性、有效性、精确性。</p>
+  </li>
+  <li>
+    <p>稳定性：从某个时间段来看是保持不变的，没有更新操作、删除操作，以查询分析为主。</p>
+  </li>
+  <li>
+    <p>变化的：反映历史变化。</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>功能</strong></th>
+      <th><strong>数据仓库</strong></th>
+      <th><strong>数据库</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>数据范围</td>
+      <td>存储历史的、完整的、反应历史变化的</td>
+      <td>当前状态数据</td>
+    </tr>
+    <tr>
+      <td>数据变化</td>
+      <td>可添加、误删除、无变更的、反映历史变化</td>
+      <td>支持频繁的增、删、改、查操作</td>
+    </tr>
+    <tr>
+      <td>应用场景</td>
+      <td>面向分析、支持战略决策</td>
+      <td>面向业务交易流程</td>
+    </tr>
+    <tr>
+      <td>设计理论</td>
+      <td>违范式、适当冗余</td>
+      <td>遵照范式（1NF、2NF、3NF等范式）、避免冗余</td>
+    </tr>
+    <tr>
+      <td>处理量</td>
+      <td>非频繁、大批量、高吞吐、有延迟</td>
+      <td>频繁、小批次、高并发、低延迟</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>面向业务的<strong style="color:red;">数据库</strong>常称作OLTP，面向分析的<strong style="color:red;">数据仓库</strong>称为OLAP。</p>
+</blockquote>
+
+<h2 id="2数据仓库的发展历程">2.数据仓库的发展历程</h2>
+
+<blockquote>
+  <p>数据仓库概念最早可追溯到20世纪70年代，希望通过一种架构将业务处理系统和分析处理分为不同的层次。</p>
+</blockquote>
+
+<blockquote>
+  <p>20世纪80年代，简历TA2(Technical Architecture2)规范，该明确定义了分析系统的四个组成部分：<em><strong>数据获取、数据访问、目录、用户服务</strong></em>。</p>
+</blockquote>
+
+<blockquote>
+  <p>1988年，IBM第一次提出信息仓库的概念：一个结构化的环境，能支持最终用户管理其全部的业务，并支持信息技术部门保证数据质量；抽象出基本组件：<em><strong>数据抽取、转换、有效性验证、加载、cube开发等</strong></em>，基本明确了数据仓库的基本原理、框架结构，以及分析系统的主要原则。</p>
+</blockquote>
+
+<hr />
+<p><strong>[敲黑板，说重点]:</strong></p>
+
+<p>转换：Sqoop进行简单的数据转换，更多的转化操作是通过ETL来实现的</p>
+
+<p>有效性验证：牵扯到数据质量的问题</p>
+
+<hr />
+
+<p>那么如何去建设数据仓库呢？</p>
+
+<ul>
+  <li>
+    <p>1) 1991年，Bill Inmon提出了自上而下（top-down）的方式建设企业数据仓库（Data Warehouse, DW），认为DW是一个整体的商业智能系统（BI）的一部分。一家企业只有一个DW，数据集市（Data Market, DM）的信息来源出自DW，在DW中，信息存储符合3NF范式。</p>
+  </li>
+  <li>
+    <p>2）Ralph Kimball则主张自下而上(bottom-up)的方式建立DW，极力推崇建立数据集市，认为DW是企业内所有DM的集合，信息总是被存储在多维模型中。</p>
+  </li>
+  <li>
+    <p>3）Bill Inmon提出了新的BI架构CIP（Corporation information factory），把DM包含了进来。CIP的核心是<strong style="color:red;">将DW架构划分为不同的层次</strong>以满足不同场景的需求，比如常见的ODS、DW（e g: DWD, DWS等）、DM等，每层根据实际场景采用不同的建设方案，该思路也是目前DW建设的架构指南，但到底是以top-down还是bottom-up方式进行DW建设，并未统一。</p>
+  </li>
+</ul>
+
+<hr />
+<p><strong>[敲黑板，说重点]:</strong></p>
+
+<p>很多人说Hadoop时代维度建模已经不是必须的了，其实不然，在整个Hadoop时代建模依然是有用的，而且是非常有意义的。Hadoop为整个大数据应用提供了技术的基础，包括Hive、Spark，只是技术架构。而我们谈及大数据的时候，更多的关注的是大数据的价值，所以在组织梳理数据内容的时候依然会有数据建模的概念。</p>
+
+<p>只不过很多公司做大数据可能是刚起步阶段，更在意与流量方面，所以不需要建模，但是等数据体量达到一定程度后，如果没有数据建模，那么数据质量也就无法保障，数据也就会废掉、烂掉。</p>
+
+<hr />
+
+<p>数据仓库分层架构图：</p>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/datawarehouse/DW-structure.png?raw=true" alt="数据仓库分层架构图" /></p>
+
+<p><strong>核心简述：</strong></p>
+<ul>
+  <li>将业务DB中数据同步到只读DB中</li>
+  <li>使用Sqoop将只读DB中的数据Import到HDFS上（ODS）</li>
+  <li>将ODS层Hive中的数据通过HQL筛选到DWS层中（DWS存储的是中间汇总的结果）</li>
+  <li>将DWS层Hive中的数据通过HQL结合具体需求筛选到DM中（DM存储的是待计算的指标）</li>
+  <li>将DM层Hive中的数据通过Sqoop，Spark SQL导入到RDBMS之MySQL中存储起来（用于数据可视化展示）</li>
+  <li>通过可视化技术读取RDBMS中相应结果数据进行可视化展示（饼状图、柱形图、折线图等）</li>
+</ul>
+
+<p><strong>为什么要对数据仓库进行分层？</strong></p>
+<ul>
+  <li>用空间换时间，通过大量的预处理来提升系统的用户体验（效率），因此数据仓库会存在大量的数据冗余。</li>
+  <li>如果不分层的话，源业务系统的业务规则发生变化将会影响整个系统的清洗过程，工作量巨大。</li>
+  <li>通过数据分层管理可以简化数据清洗的过程，因为原来把一步的工作分了多个步骤去执行，相当于把一个复杂的工作拆分成了多个简单的工作，把一个大的黑盒变成了一个白盒，每一层的处理的逻辑都相对简单和容易理解，这样我们比较容易确定每一个步骤的正确性，当数据发生错误的时候，往往我们需要调整某个步骤即可。</li>
+</ul>
+
+<p><strong>说了这么多，那么数据仓库的建立步骤呢？</strong></p>
+
+<ul>
+  <li>1) 收集和分析业务需求</li>
+  <li>2）建立数据模型和数据仓库的物理设计</li>
+  <li>3）定义数据源</li>
+  <li>4）选择数据仓库技术和平台</li>
+  <li>5）从操作型数据库中抽取，净化和转换数据到数据仓库中</li>
+  <li>6）选择访问和报表工具</li>
+  <li>7）选择数据库连接软件</li>
+  <li>8）选择数据分析和数据展示软件</li>
+  <li>9）更新数据仓库</li>
+</ul>
+
+<h2 id="3基于大数据的数仓构建特点">3.基于大数据的数仓构建特点</h2>
+
+<ul>
+  <li>1) 特点</li>
+</ul>
+
+<p>鉴于互联网行业的“要么变化，要么去死”的影响，决定了在互联网领域，基于大数据的数据仓库建设是无法按照原有的项目流程、开发模式进行的，更多的是需要结合新的技术体系、业务场景进行灵活的调整，以快速响应需求为导向。</p>
+
+<ul>
+  <li>2) 广泛的应用场景</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>传统的数仓</th>
+      <th>基于大数据的数仓</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>建设周期长</td>
+      <td>要求快速响应需求</td>
+    </tr>
+    <tr>
+      <td>需求稳定</td>
+      <td>需求灵活、多变</td>
+    </tr>
+    <tr>
+      <td>时效性要求不高</td>
+      <td>对实时性有不同程度的要求</td>
+    </tr>
+    <tr>
+      <td>面向DSS、CRM、BI等系统</td>
+      <td>除了面向DSS、BI等传统应用外，还要响应用户画像、个性化推荐（比如你看了一遍文章，再给你推荐十篇同类型文章）、机器学习、数据分析等各种复杂的应用场景</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>阿里系：OneData（公司级别所有数据应用都基于我这一个数据，只有一个数据出口，不论实时还是离线都是统一的唯一出口），OneService（数据服务也是统一的）</p>
+
+<p>很多时候，我们提到数仓，就会觉得是<code>离线</code>的、至少也是<code>T+1</code>的，但是这是传统的数据仓库，而基于大数据的数据仓库不应该这么理解，实时也应该归纳到数据仓库中。</p>
+
+<ul>
+  <li>3) 技术栈更全面、复杂
+    <ul>
+      <li>传统数仓建设：更多是基于成熟的商业数据集成平台，比如Oracle、Informatica等，技术体系比较成熟完善，但相对较封闭，对实施者技术面要求也相对专业且单一。</li>
+      <li>基于大数据的数仓建设：一般是基于非商业、开源的技术，且涉及技术较广泛、复杂，没有商业的公司提供服务，需要自己维护更多的技术框架。常见的是基于Hadoop的生态建设。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>技术栈总图：</p>
+
+<p><img src="https://github.com/buildupchao/ImgStore/blob/master/blog/datawarehouse/DW-technology-stack.png?raw=true" alt="技术栈总图" /></p>
+
+<ul>
+  <li>4) 数仓模型设计更灵活
+    <ul>
+      <li>传统数仓：
+        <ul>
+          <li>有较为稳定的业务场景和相对可靠的数据质量，同时也有较为稳定的需求，对数仓的建设有较为完善的项目流程管控，数仓模型设计有严格的、稳定的建设标准</li>
+        </ul>
+      </li>
+      <li>互联网行业：
+        <ul>
+          <li>行业变化快、业务灵活，同时互联网又是个靠速度存活的行业</li>
+          <li>源数据种类繁多：数据库、Nginx log、用户浏览轨迹等结构化、非结构化、半结构化数据</li>
+          <li>数据质量相对差，层次不齐</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>综上，在互联网领域，数仓模型是必须要存在（不一定是维度建模，但是至少需要一个建模），且数仓模型的设计更<strong style="color: red;">关注灵活、快速响应</strong>和应对多变的市场环境，更加以快速<strong style="color: red;">解决业务、运营问题</strong>为导向，快速数据接入、快速业务接入，更不存在一劳永逸。</p>
+
+<h2 id="4数据仓库的应用范围与前景">4.数据仓库的应用范围与前景</h2>
+
+<ul>
+  <li>数仓存在的意义
+    <ul>
+      <li>工程治理</li>
+    </ul>
+  </li>
+  <li>基于大数据的数据仓库在互联网行业应用：
+    <ul>
+      <li>BI</li>
+      <li>消息推送</li>
+      <li>千人千面</li>
+      <li>用户画像</li>
+      <li>反欺诈</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5发展方向">5.发展方向</h2>
+
+<ul>
+  <li>
+    <p>1）数据分析、数据挖掘、人工智能、机器学习、风险控制、无人驾驶</p>
+  </li>
+  <li>
+    <p>2）数据化运营、精准运营</p>
+  </li>
+  <li>
+    <p>3）广告精准、智能投放</p>
+  </li>
+</ul>
+
+<h2 id="resource-link">Resource Link</h2>
+
+<ul>
+  <li>[1] <a href="https://blog.csdn.net/mark_wu2000/article/details/82694865">数据仓库(三)之架构篇</a></li>
+  <li>[2] <a href="https://blog.csdn.net/u012965373/article/details/81903095">数据仓库学习笔记 — 如何设计数据仓库</a></li>
+</ul>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/bigdataplatform/2019/05/31/bigdata-task-schedule-platform.html" rel="prev">大数据任务调度平台</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/datawarehouse/2019/05/19/dw-summary-from-0-to-1.html" rel="next">数据仓库从0到1总结整理</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/datawarehouse/2019/05/20/dw-conception-and-ER-entity-model.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>
