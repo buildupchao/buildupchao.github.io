@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://www.buildupchao.cn/tech-talking/2020/12/08/what-do-we-lack-of-ability.html</loc>
+    
+    <lastmod>2020-12-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/12/08/how-log4j2-split-log-cause.html</loc>
+    
+    <lastmod>2020-12-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/12/07/how-log4j2-split-log.html</loc>
+    
+    <lastmod>2020-12-07T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/09/flume-performance-optimize-3.html</loc>
+    
+    <lastmod>2020-11-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/08/flume-performance-optimize-2.html</loc>
+    
+    <lastmod>2020-11-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2020/11/07/flume-performance-optimize-1.html</loc>
+    
+    <lastmod>2020-11-07T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2020/04/20/dw-super-tmp-table-issue.html</loc>
+    
+    <lastmod>2020-04-20T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/03/17/normal-java-cron-task.html</loc>
+    
+    <lastmod>2020-03-17T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2020/02/17/why-donot-use-Executors.new.html</loc>
+    
+    <lastmod>2020-02-17T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flink/2020/01/16/deep-in-cep-and-watermark-for-flink.html</loc>
+    
+    <lastmod>2020-01-16T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flink/2020/01/13/flink-table-api-and-sql.html</loc>
+    
+    <lastmod>2020-01-13T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/db/2020/01/12/how-to-set-mysql-fsync-redo-log-strategy.html</loc>
+    
+    <lastmod>2020-01-12T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flink/2020/01/05/real-time-datawarehouse-based-on-flink.html</loc>
+    
+    <lastmod>2020-01-05T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/yearlysummary/2020/01/01/come-on-new-year.html</loc>
+    
+    <lastmod>2020-01-01T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/technology-challenge/2019/12/26/how-to-refresh-conf-automatically-for-nacos.html</loc>
+    
+    <lastmod>2019-12-26T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/technology-challenge/2019/12/23/technology-challenge-for-3-weeks.html</loc>
+    
+    <lastmod>2019-12-23T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/latestreading/2019/12/21/latestreading-how-to-win-friends-and-influence-people.html</loc>
+    
+    <lastmod>2019-12-21T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/thought-line/2019/12/19/coming-of-age-ceremony.html</loc>
+    
+    <lastmod>2019-12-19T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/arch/2019/11/29/difference-in-rd-by-sync-data.html</loc>
+    
+    <lastmod>2019-11-29T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2019/11/26/service-down-after-sync-redis-data.html</loc>
+    
+    <lastmod>2019-11-26T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2019/10/22/escheduler-task-scheduling-delay-for-one-hour.html</loc>
+    
+    <lastmod>2019-10-22T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2019/10/09/escheduler-upgrading-v11-cannot-schedule-task.html</loc>
+    
+    <lastmod>2019-10-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/yearlysummary/2019/08/02/we-are-in-the-past-at-last.html</loc>
+    
+    <lastmod>2019-08-02T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/installtutorial/2019/07/16/install-mysql-for-linux-error.html</loc>
+    
+    <lastmod>2019-07-16T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/tech-talking/2019/07/10/tech-ebook-sharing.html</loc>
+    
+    <lastmod>2019-07-10T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/tech-talking/2019/07/06/saying-manipulate-script-technology-significance.html</loc>
+    
+    <lastmod>2019-07-06T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2019/06/27/maven-package-specify-main-class.html</loc>
+    
+    <lastmod>2019-06-27T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/bigdataplatform/2019/06/13/airflow-install-tutorial.html</loc>
+    
+    <lastmod>2019-06-13T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datawarehouse/2019/06/11/dw-apply-to-realtime-app.html</loc>
+    
+    <lastmod>2019-06-11T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datawarehouse/2019/06/08/dw-ER-modeling-and-apply.html</loc>
+    
+    <lastmod>2019-06-08T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datawarehouse/2019/06/07/dw-based-on-hadoop.html</loc>
+    
+    <lastmod>2019-06-07T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2019/06/06/Arthas-for-java.html</loc>
+    
+    <lastmod>2019-06-06T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/bigdataplatform/2019/06/02/airflow-task-schedule-platform-using.html</loc>
+    
+    <lastmod>2019-06-02T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/bigdataplatform/2019/05/31/bigdata-task-schedule-platform.html</loc>
+    
+    <lastmod>2019-05-31T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datawarehouse/2019/05/20/dw-conception-and-ER-entity-model.html</loc>
+    
+    <lastmod>2019-05-20T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datawarehouse/2019/05/19/dw-summary-from-0-to-1.html</loc>
+    
+    <lastmod>2019-05-19T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/hive/2019/05/18/increase-hive-sql-performance-by-analyze-method.html</loc>
+    
+    <lastmod>2019-05-18T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/hive/2019/05/11/cluster-loadbalance-strategy-for-combine-hive-cluster.html</loc>
+    
+    <lastmod>2019-05-11T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/installtutorial/2019/03/01/python3-install-tutorial.html</loc>
+    
+    <lastmod>2019-03-01T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2019/02/22/alert-release-accident-with-CountDownLatch-effect.html</loc>
+    
+    <lastmod>2019-02-22T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/arch/2019/02/01/design-a-distributed-RPC-structure.html</loc>
+    
+    <lastmod>2019-02-01T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2019/01/27/how-to-save-or-restore-core-memory-data-of-Java-application.html</loc>
+    
+    <lastmod>2019-01-27T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/yearlysummary/2019/01/23/yearly-summary.html</loc>
+    
+    <lastmod>2019-01-23T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/10/10/mysql-load-table-remarks.html</loc>
+    
+    <lastmod>2018-10-10T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datastructureandalgo/2018/10/04/datastructure-for-linklist-and-arraylist.html</loc>
+    
+    <lastmod>2018-10-04T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2018/08/15/ks-oom-troubleshooting.html</loc>
+    
+    <lastmod>2018-08-15T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/hive/2018/07/21/hive-data-skew.html</loc>
+    
+    <lastmod>2018-07-21T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/onlinetroubleshooting/2018/07/20/kafka-task-congestion.html</loc>
+    
+    <lastmod>2018-07-20T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/06/09/note-JavaWeb-project-refactor-after-2years.html</loc>
+    
+    <lastmod>2018-06-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/05/25/how-to-extend-your-Java-technology-stack-in-high-speed.html</loc>
+    
+    <lastmod>2018-05-25T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/redis/2018/05/15/exciting-oom-for-redis-cache-design.html</loc>
+    
+    <lastmod>2018-05-15T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/04/23/deep-in-reason-by-parts-of-Java-code.html</loc>
+    
+    <lastmod>2018-04-23T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/04/21/you-really-know-Java-OOP.html</loc>
+    
+    <lastmod>2018-04-21T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2018/01/19/java8-stram-toMap-bug.html</loc>
+    
+    <lastmod>2018-01-19T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/yearlysummary/2018/01/01/new-year-new-me-summary.html</loc>
+    
+    <lastmod>2018-01-01T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/hadoop/2017/11/18/bigdata-mapjoin-and-reducejoin.html</loc>
+    
+    <lastmod>2017-11-18T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/datastructureandalgo/2017/11/15/datastructure-and-algorithem-archive.html</loc>
+    
+    <lastmod>2017-11-15T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/spark/2017/11/11/spark-rdd-basic-knowledge.html</loc>
+    
+    <lastmod>2017-11-11T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/spark/2017/11/09/how-increasing-task-concurrent-for-spark-streaming.html</loc>
+    
+    <lastmod>2017-11-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/spark/2017/11/03/spark-execute-process-by-spark-component.html</loc>
+    
+    <lastmod>2017-11-03T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/latestreading/2017/10/22/java-middleware-technology-from-alibaba.html</loc>
+    
+    <lastmod>2017-10-22T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/hive/2017/09/29/hive-distinct-inter-one-with-many.html</loc>
+    
+    <lastmod>2017-09-29T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/flume/2017/09/14/flume-log-to-kafka-consoleconsumer.html</loc>
+    
+    <lastmod>2017-09-14T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/db/2017/08/16/mysql-force-index.html</loc>
+    
+    <lastmod>2017-08-16T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2016/12/29/technology-blog-system-design-develop-summary.html</loc>
+    
+    <lastmod>2016-12-29T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2016/12/20/how-to-realize-sqrt-func-using-java.html</loc>
+    
+    <lastmod>2016-12-20T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2016/12/11/synchronized-detail.html</loc>
+    
+    <lastmod>2016-12-11T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/java/2016/12/10/java-hashtable-and-hashmap-compare.html</loc>
+    
+    <lastmod>2016-12-10T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.buildupchao.cn/installtutorial/2016/12/09/install_mysql5.6_on_centos7.html</loc>
+    
+    <lastmod>2016-12-09T00:00:00+08:00</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</urlset>

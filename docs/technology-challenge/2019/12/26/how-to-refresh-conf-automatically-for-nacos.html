@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="google-site-verification" content="MdAsWEAIe0dMLA59L9IdA2QUo5XPPAYnvv-vJrds1WU" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+    <title> 【技术挑战】Nacos自动刷新配置如何实现的？ - buildupchao博客 </title>
+    <meta name="keywords" content="technology-challenge,技术挑战,Nacos,Java">
+    <meta name="description"
+          content="&lt;p&gt;&lt;strong&gt;技术挑战发展进度列表：&lt;/strong&gt;&lt;/p&gt;
+
+">
+
+    <link rel="canonical" href="http://www.buildupchao.cn/technology-challenge/2019/12/26/how-to-refresh-conf-automatically-for-nacos.html">
+    <link rel="alternate" type="application/rss+xml" title="buildupchao | 各自努力 | 顶峰相见" href="http://www.buildupchao.cn/feed.xml">
+
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+    <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+    <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="/assets/css/gitalk.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/css/common.css">
+
+    <!-- CSS set in page -->
+    
+
+    <!-- CSS set in layout -->
+    
+    <link rel="stylesheet" href="/assets/css/sidebar-post-nav.css">
+    
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zoomify.min.css">
+
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/zoomify.min.js"></script>
+    <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+    <script>
+      $(function() {
+          $("p img").each(function() {
+              $(this).addClass('zoomify-img-big');
+          });
+          $(".zoomify-img-big").zoomify().on({
+            'zoom-in-complete.zoomify': function() {
+                $(".zoomed").css('margin', '0 auto');
+            },
+            'zoom-out-complete.zoomify': function() {
+
+            }
+          });
+      });
+    </script>
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+    <div class="site-header-topbar">
+        <div class="container">
+            <div class="topbar-menu">
+                
+                <div class="item">
+                    <a href="/arch.html"
+                       target="_self"
+                       title="架构">
+                        架构
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/java.html"
+                       target="_self"
+                       title="Java">
+                        Java
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/bigdata.html"
+                       target="_self"
+                       title="大数据">
+                        大数据
+                    </a>
+                </div>
+                
+                <div class="item">
+                    <a href="/latestreading.html"
+                       target="_self"
+                       title="阅读">
+                        阅读
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a id="site-header-brand" href="/" title="buildupchao">
+            <!-- <span class="octicon octicon-smiley"></span> -->
+            buildupchao
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/"
+                   target=""
+                   title="首页">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/spark.html"
+                   target="_self"
+                   title="Spark">
+                    Spark
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/datawarehouse.html"
+                   target="_self"
+                   title="数据仓库">
+                    数据仓库
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/bigdataplatform.html"
+                   target="_self"
+                   title="大数据平台">
+                    大数据平台
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/archives.html"
+                   target="_self"
+                   title="归档">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class=" site-header-nav-item hvr-underline-from-center">
+                <a href="/about.html"
+                   target="_self"
+                   title="其他">
+                    其他
+                </a>
+                
+                <ul class="submenu" style="background: transparent;">
+                    
+                    <li><a href="/about.html">关于大超</a></li>
+                    
+                    <li><a href="/mylearningroadmap.html">我的学习路线</a></li>
+                    
+                    <li><a href="/bookmark.html">书签直达站</a></li>
+                    
+                </ul>
+                
+            </div>
+            
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <section class="jumbotron geopattern" data-pattern-id="【技术挑战】Nacos自动刷新配置如何实现的？">
+    <div class="container">
+        <div id="jumbotron-meta-info">
+            
+            
+            
+              <h1>【技术挑战】Nacos自动刷新配置如何实现的？</h1>
+            
+
+            <span class="meta-info">
+                
+                
+                <span class="octicon octicon-calendar"></span> 2019/12/26
+                
+                &nbsp;&nbsp;
+                
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="octicon octicon-eye-watch"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+                </span>
+
+
+            </span>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function(){
+
+        $('.geopattern').each(function(){
+            $(this).geopattern($(this).data('pattern-id'));
+        });
+
+    });
+</script>
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="row">
+
+        
+        <div class="col-md-9 markdown-body">
+
+            <p><strong>技术挑战发展进度列表：</strong></p>
+
+<ul>
+  <li><a href="http://www.buildupchao.cn/technology-challenge/2019/12/23/technology-challenge-for-3-weeks.html">三周技术挑战约定之缘起</a></li>
+  <li><a href="http://www.buildupchao.cn/technology-challenge/2019/12/26/how-to-refresh-conf-automatically-for-nacos.html">【技术挑战】Nacos自动刷新配置如何实现的？</a></li>
+</ul>
+
+<!-- more -->
+
+<blockquote>
+  <p>文章很长，请做好心理准备。</p>
+</blockquote>
+
+<h2 id="1nacos是什么">1.Nacos是什么？</h2>
+
+<p>摘自Nacos官网：</p>
+
+<blockquote>
+  <p>Nacos is committed to help you discover, configure, and manage your microservices. It provides a set of simple and useful features enabling you to realize dynamic service discovery, service configuration, service metadata and traffic management.</p>
+</blockquote>
+
+<p>大意为：Nacos致力于帮助你发现、配置、管理微服务。Nacos提供了一系列简单易用的特性，它们可以帮助你实现动态服务发现、服务配置、服务元数据以及流量管理。</p>
+
+<blockquote>
+  <p>Key features of Nacos:
+Service Discovery And Service Health Check
+Dynamic configuration management
+Dynamic DNS service
+Service governance and metadata management</p>
+</blockquote>
+
+<p>大意为：Nacos的主要特性：服务发现和服务的健康检查，动态配置管理，动态DNS服务，服务治理和元数据管理。</p>
+
+<p>综上，我们大概可以知道Nacos是致力于动态服务发现、配置管理、服务元数据以及流量管理的平台。相比大多数人已经对这几个关键字耳熟能详了，就不做过多解释，详情可根据文章末尾资料链接前往官网查看。</p>
+
+<h2 id="2开始邂逅nacos">2.开始邂逅Nacos</h2>
+
+<h3 id="21-初涉nacos">2.1 初涉Nacos</h3>
+
+<p>为了方便测试，我们采用自构建jar包的方式使用Nacos</p>
+
+<ul>
+  <li>从Github下载Nacos代码：http://github.com/alibaba/nacos.git</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">git clone http://github.com/alibaba/nacos.git</code></pre></figure>
+
+<ul>
+  <li>打包下载好的nacos项目目录，执行编译打包命令（默认你已安装配置好Java环境和Maven环境）</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cd </span>your_clone_nacos_project_dir
+mvn <span class="nt">-Prelease-nacos</span> clean <span class="nb">install</span> <span class="nt">-U</span> <span class="nt">-Dmaven</span>.test.skip<span class="o">=</span><span class="nb">true</span></code></pre></figure>
+
+<ul>
+  <li>打包完成，进入your_clone_nacos_project_dir/distribution/target/目录，会看到如下文件列表
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/nacos-jar.png?raw=true" alt="" />
+<br /></li>
+  <li>拷贝nacos-server-1.2.0-SNAPSHOT.tar.gz（xxx.zip包亦可）到你的服务器或者本地应用部署目录下然后解压缩</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">mv </span>nacos-server-1.2.0-SNAPSHOT.tar.gz your_app_deploy_dir
+<span class="nb">cd </span>your_app_deploy_dir
+<span class="nb">tar</span> <span class="nt">-zxvf</span> nacos-server-1.2.0-SNAPSHOT.tar.gz</code></pre></figure>
+
+<p>解压后，目录如下：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/nacos-server-dir.png?raw=true" alt="" />
+<br /></p>
+<ul>
+  <li>启动nacos-server，启动/关闭脚本在bin/目录下</li>
+</ul>
+
+<p>关于nacos server的启动方式有两种：#1，采用单机模式，#2，集群模式。鉴于我们只是学习研究使用，无需采用集群模式（因为集群模式还需进行一系列配置），直接采用单机模式即可。</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sh startup.sh <span class="nt">-m</span> standalone</code></pre></figure>
+
+<p>启动后会看到如下信息：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/start-nacos-server.png?raw=true" alt="" />
+<br />
+然后查看日志是否有报错，有错误信息，一般很简单易解决，实在不懂可自行google或者咨询nacos管理员。<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/nacos-log-console-page.png?raw=true" alt="" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/nacos-log-info.png?raw=true" alt="" />
+<br />
+此外，通过上图日志，我们可以知道nacos-server启动在8848端口（该端口我们后续会使用）。<br />
+其次，我们可以获取到另外两项信息：进程号以及Console控制台访问链接。
+<br /><br />
+接下来，我们先来体验下nacos动态配置功能：<br />
+首先，我们对nacos example模块代码中<code>com.alibaba.nacos.example</code>包下的<code>ConfigExample</code>进行修改并启动。<br />
+修改后代码如下所示，其中<code>TimeUnit.SECONDS.sleep(Integer.MAX_VALUE)</code>代码是为了防止主线程退出而无法获取配置修改信息：<br /></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">alibaba</span><span class="o">.</span><span class="na">nacos</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Properties</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.alibaba.nacos.api.NacosFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.nacos.api.config.ConfigService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.nacos.api.config.listener.Listener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.alibaba.nacos.api.exception.NacosException</span><span class="o">;</span>
+<span class="cm">/**
+ * Config service example
+ *
+ * @author Nacos
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConfigExample</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NacosException</span><span class="o">,</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">serverAddr</span> <span class="o">=</span> <span class="s">"localhost"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">dataId</span> <span class="o">=</span> <span class="s">"test"</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">group</span> <span class="o">=</span> <span class="s">"DEFAULT_GROUP"</span><span class="o">;</span>
+        <span class="n">Properties</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+        <span class="n">properties</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"serverAddr"</span><span class="o">,</span> <span class="n">serverAddr</span><span class="o">);</span>
+        <span class="n">ConfigService</span> <span class="n">configService</span> <span class="o">=</span> <span class="n">NacosFactory</span><span class="o">.</span><span class="na">createConfigService</span><span class="o">(</span><span class="n">properties</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">configService</span><span class="o">.</span><span class="na">getConfig</span><span class="o">(</span><span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="mi">5000</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"got content: %s\n"</span><span class="o">,</span> <span class="n">content</span><span class="o">);</span>
+        <span class="n">configService</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="k">new</span> <span class="n">Listener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">receiveConfigInfo</span><span class="o">(</span><span class="n">String</span> <span class="n">configInfo</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"time: %d, receive: %s\n"</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">(),</span> <span class="n">configInfo</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="n">Executor</span> <span class="nf">getExecutor</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><br />
+控制台显示信息如下：
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-new-config-1.png?raw=true" alt="deep-in-nacos-new-config-1" />
+<br /><br />
+然后，登录nacos控制台，初始化默认账号/密码为：nacos/nacos，并新增一个配置信息。<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-new-config-2.png?raw=true" alt="deep-in-nacos-new-config-2" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-new-config-3.png?raw=true" alt="deep-in-nacos-new-config-3" />
+<br /><br />
+我们将在控制台查看到获取到如下配置信息：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-new-config-4.png?raw=true" alt="deep-in-nacos-new-config-4" />
+<br /><br />
+接下来，我们修改一次配置信息内容，并查看配置客户端listener是否可以获取到对应修改：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-update-config-1.png?raw=true" alt="deep-in-nacos-update-config-1" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-update-config-2.png?raw=true" alt="deep-in-nacos-update-config-2" />
+<br /><br />
+显然，客户端会获取到最新数据。到此为止，已经完成一个简单的动态配置管理功能（删除类似，不再敖述）。<br /></p>
+
+<h3 id="21-小结">2.1 小结</h3>
+
+<ul>
+  <li>Nacos服务端保存配置信息</li>
+  <li>客户端连接到服务端之后，通过dataId和group获取具体的配置信息</li>
+  <li>当服务端配置信息发生变更时，客户端会收到通知</li>
+  <li>客户端拿到变更后的配置信息后，然后做相应处理</li>
+</ul>
+
+<p>那客户端是如何感知到nacos服务端配置信息变更呢？也就是说，客户端和服务端的数据交互是如何实现的。而根据经验来说，通常是两种交互方式：#1,服务端主动推送数据；#2，客户端从服务端拉取数据。具体如何实现，我们下面开始逐渐深入了解。</p>
+
+<h2 id="3从客户端潜入nacos实时更新配置原理"><span id="client-rt-load-config">3.从客户端潜入Nacos实时更新配置原理</span></h2>
+
+<h3 id="31-configfactory">3.1 ConfigFactory</h3>
+
+<ul>
+  <li>首先，在<code>ConfigExample</code>代码中，我们首先看到通过<code>NacosFactory.createConfigService(properties)</code>创建了一个<code>ConfigService</code>，而<code>NacosFactory</code>是个工厂类，底层调用了对应xxxFactory的createxxxService方法</li>
+</ul>
+
+<p><img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-1.png?raw=true" alt="deep-in-nacos-for-client-1" />
+<br />
+可以看到实际上是调用了<code>ConfigFactory#createConfigService</code>，通过反射调用了带有一个Properties参数的<code>NacosConfigService</code>的构造方法来创建<code>ConfigService</code>。而且，此处并没有对实例进行缓存也没有采用单例模式，每次调用均会创建一个<code>ConfigService</code>实例。</p>
+
+<h3 id="32-nacosconfigservice">3.2 NacosConfigService</h3>
+
+<ul>
+  <li>接下来，我们来查看nacos client模块下<code>com.alibaba.nacos.client.config</code>包下的<code>NacosConfigService</code>构造方法都做了些什么工作</li>
+</ul>
+
+<p><img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-2.png?raw=true" alt="deep-in-nacos-for-client-2" />
+<br />
+由上图可知，<code>NacosConfigService</code>构造方法除去初始化命名空间，主要是做了两件事：<br />
+（1）采用装饰器模式，将ServerHttpAgent实例包装成MetricsHttpAgent对象<br />
+（2）实例化ClientWorker
+<br /><br /></p>
+<h4 id="321-metricshttpagent和serverhttpagent">3.2.1 MetricsHttpAgent和ServerHttpAgent</h4>
+
+<p>MetricsHttpAgent和ServerHttpAgent均实现了<code>HttpAgent</code>接口。针对上述的agent，MetricsHttpAgent只是对ServerHttpAgent进行了包装，增加了一些耗时统计操作，实际上工作的类是ServerHttpAgent。而ServerHttpAgent构造方法中主要是初始化了<code>ServerListManager</code>用于获取nacos-server地址信息和初始化其他属性（encode、aksk、maxRetry）。
+<br /><br />
+此外，agent作为参数传入ClientWorker构造方法，之后在ClientWorker中发挥作用。</p>
+
+<h4 id="322-clientworker">3.2.2 ClientWorker</h4>
+
+<p><img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-3.png?raw=true" alt="deep-in-nacos-for-client-3" />
+<br />
+从上述代码可以看到，<code>ClientWorker</code>构造方法中，除了将<code>HttpAgent</code>和<code>ConfigFilterChainManager</code>维持在自己内部，还初始化了两个线程池：<br />
+（1）第1个线程池是只拥有一个线程且用于定时执行任务。每间隔10ms执行一次<code>checkConfigInfo()</code>方法，用于检查配置信息<br />
+（2）第2个线程池是用于长轮询的普通线程池（并未采用定时功能）。
+<br /><br />
+接下来，我们来查看下<code>checkConfigInfo()</code>方法内部实现：<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-4.png?raw=true" alt="deep-in-nacos-for-client-4" />
+<br />
+可以看出，<code>checkConfigInfo()</code>会取出来一部分任务，通过<code>executorService</code>线程池去执行<code>LongPollingRunnable</code>任务，且每个任务有一个taskId，<code>LongPollingRunnable</code>中会根据taskId获取<code>CacheData</code>。
+<br /><br />
+接下来，我们看一下<code>LongPollingRunnable</code>内部实现：<br /></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">LongPollingRunnable</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">taskId</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">LongPollingRunnable</span><span class="o">(</span><span class="kt">int</span> <span class="n">taskId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">taskId</span> <span class="o">=</span> <span class="n">taskId</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">CacheData</span><span class="o">&gt;</span> <span class="n">cacheDatas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">CacheData</span><span class="o">&gt;();</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">inInitializingCacheList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// check failover config</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">CacheData</span> <span class="n">cacheData</span> <span class="o">:</span> <span class="n">cacheMap</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">cacheData</span><span class="o">.</span><span class="na">getTaskId</span><span class="o">()</span> <span class="o">==</span> <span class="n">taskId</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">cacheDatas</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">cacheData</span><span class="o">);</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">checkLocalConfig</span><span class="o">(</span><span class="n">cacheData</span><span class="o">);</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">cacheData</span><span class="o">.</span><span class="na">isUseLocalConfigInfo</span><span class="o">())</span> <span class="o">{</span>
+                            <span class="n">cacheData</span><span class="o">.</span><span class="na">checkListenerMd5</span><span class="o">();</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"get local config info error"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// check server config</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">changedGroupKeys</span> <span class="o">=</span> <span class="n">checkUpdateDataIds</span><span class="o">(</span><span class="n">cacheDatas</span><span class="o">,</span> <span class="n">inInitializingCacheList</span><span class="o">);</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">groupKey</span> <span class="o">:</span> <span class="n">changedGroupKeys</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">String</span><span class="o">[]</span> <span class="n">key</span> <span class="o">=</span> <span class="n">GroupKey</span><span class="o">.</span><span class="na">parseKey</span><span class="o">(</span><span class="n">groupKey</span><span class="o">);</span>
+                <span class="n">String</span> <span class="n">dataId</span> <span class="o">=</span> <span class="n">key</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">String</span> <span class="n">group</span> <span class="o">=</span> <span class="n">key</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                <span class="n">String</span> <span class="n">tenant</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">tenant</span> <span class="o">=</span> <span class="n">key</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+                <span class="o">}</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">getServerConfig</span><span class="o">(</span><span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="n">tenant</span><span class="o">,</span> <span class="mi">3000L</span><span class="o">);</span>
+                    <span class="n">CacheData</span> <span class="n">cache</span> <span class="o">=</span> <span class="n">cacheMap</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">GroupKey</span><span class="o">.</span><span class="na">getKeyTenant</span><span class="o">(</span><span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="n">tenant</span><span class="o">));</span>
+                    <span class="n">cache</span><span class="o">.</span><span class="na">setContent</span><span class="o">(</span><span class="n">content</span><span class="o">);</span>
+                    <span class="n">LOGGER</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"[{}] [data-received] dataId={}, group={}, tenant={}, md5={}, content={}"</span><span class="o">,</span>
+                        <span class="n">agent</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="n">tenant</span><span class="o">,</span> <span class="n">cache</span><span class="o">.</span><span class="na">getMd5</span><span class="o">(),</span>
+                        <span class="n">ContentUtils</span><span class="o">.</span><span class="na">truncateContent</span><span class="o">(</span><span class="n">content</span><span class="o">));</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NacosException</span> <span class="n">ioe</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
+                        <span class="s">"[%s] [get-update] get changed config exception. dataId=%s, group=%s, tenant=%s"</span><span class="o">,</span>
+                        <span class="n">agent</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="n">tenant</span><span class="o">);</span>
+                    <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">ioe</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">CacheData</span> <span class="n">cacheData</span> <span class="o">:</span> <span class="n">cacheDatas</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">cacheData</span><span class="o">.</span><span class="na">isInitializing</span><span class="o">()</span> <span class="o">||</span> <span class="n">inInitializingCacheList</span>
+                    <span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">GroupKey</span><span class="o">.</span><span class="na">getKeyTenant</span><span class="o">(</span><span class="n">cacheData</span><span class="o">.</span><span class="na">dataId</span><span class="o">,</span> <span class="n">cacheData</span><span class="o">.</span><span class="na">group</span><span class="o">,</span> <span class="n">cacheData</span><span class="o">.</span><span class="na">tenant</span><span class="o">)))</span> <span class="o">{</span>
+                    <span class="n">cacheData</span><span class="o">.</span><span class="na">checkListenerMd5</span><span class="o">();</span>
+                    <span class="n">cacheData</span><span class="o">.</span><span class="na">setInitializing</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="n">inInitializingCacheList</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+
+            <span class="n">executorService</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="c1">// If the rotation training task is abnormal, the next execution time of the task will be punished</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"longPolling error : "</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="n">executorService</span><span class="o">.</span><span class="na">schedule</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">taskPenaltyTime</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><br />
+由代码可以看出，主要分为两部分内容：#1，检查本地配置信息（check failover config）；#2，获取到服务端配置信息并更新到本地（check server config）
+<br /><br />
+（1）检查本地配置信息（check failover config）<br /></p>
+
+<p>首先，根据taskId获取到<code>CacheData</code>，然后对<code>CacheData</code>进行检查，主要是进行本地配置检查和监听器的md5检查。其中，本地检查主要是做一个故障容错，当服务端挂掉时，Nacos客户端可以从本地文件系统获取相关配置信息。而Nacos配置信息存储在如下目录中：<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-5.png?raw=true" alt="deep-in-nacos-for-client-5" />
+<br /><br /></p>
+
+<p>（2）检查服务端配置信息（check server config）<br /></p>
+
+<p><img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-6.png?raw=true" alt="deep-in-nacos-for-client-6" />
+<br /><br />
+首先，通过调用<code>checkUpdateDataIds(cacheDatas, inInitializingCacheList)</code>方法，从Server获取值变化了的DataID列表。<br />
+然后，通过调用<code>getServerConfig(dataId, group, tenant, 3000L)</code>方法，从Server获取最新的配置信息且把最新的配置信息保存到<code>CacheData</code>中。<strong style="color:red;">而<code>CacheData#setContent</code>中不仅会保存最新配置信息，还会更新该<code>CacheData</code>的md5值。</strong><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-10.png?raw=true" alt="deep-in-nacos-for-client-10" />
+<br />
+最后，调用<code>cacheData.checkListenerMd5()</code>方法（既然上面更新了md5值，那么这里进行check也就不足为奇了）。<br />
+此外，任务最后又重新提交了本任务 <code>executorService.execute(this);</code>。
+<br /><br /></p>
+
+<p>到此，我们就已经完成了<code>ConfigService</code>的创建，接下来就可以为该<code>ConfigService</code>添加一个<code>Listener</code>。<code>ConfigService#addListener</code>底层是调用了 <code>ClientWorker#addTenantListeners</code>方法。
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-7.png?raw=true" alt="deep-in-nacos-for-client-7" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-8.png?raw=true" alt="deep-in-nacos-for-client-8" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-9.png?raw=true" alt="deep-in-nacos-for-client-9" />
+<br /><br />
+由此观察，<code>ClientWorker#addTenantListeners</code>方法主要做了两件事：#1，根据dataId、group和tenant去获取<code>CacheData</code>对象；#2，将当前要添加的<code>Listener</code>对象添加到<code>CacheData</code>中（即<code>CacheData</code>持有<code>Listener</code>，所以可以回调<code>Listener#receiveConfigInfo</code>方法）。另外，<code>CacheData#addListener</code>方法中会将listener与CacheData的md5属性值一起作为参数构建<code>ManagerListenerWrap</code>对象并存储到<code>CacheData</code>的listeners列表。
+<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-11.png?raw=true" alt="deep-in-nacos-for-client-11" />
+<br /><br />
+现在，我们已经大概了解了<code>ConfigService</code>，但是，还要一个问题待解决：<code>Listener</code>的回调方法<code>receiveConfigInfo</code>是在哪里被调用的？动脑子想想啊，既然要回调，肯定是检测到配置信息有变动了啊，那检测在哪里发生的？答案显而易见，没错，就是<code>CacheData#checkListenerMd5</code>。So cool，让我们开始从<code>LongPollingRunnable#run</code> -&gt; <code>CacheData#checkListenerMd5</code>，checkListenerMd5代码如下：
+<br /></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">checkListenerMd5</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(</span><span class="n">ManagerListenerWrap</span> <span class="n">wrap</span> <span class="o">:</span> <span class="n">listeners</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">md5</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">wrap</span><span class="o">.</span><span class="na">lastCallMd5</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">safeNotifyListener</span><span class="o">(</span><span class="n">dataId</span><span class="o">,</span> <span class="n">group</span><span class="o">,</span> <span class="n">content</span><span class="o">,</span> <span class="n">md5</span><span class="o">,</span> <span class="n">wrap</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><br />
+通过代码可知，checkListenerMd5方法会检查<code>CacheData</code>当前的md5值与<code>CacheData</code>所持有的listener中保存的md5值是否一致，如果不一致，那么就会调用safeNotifyListener。看名字，应该是通知Listener的使用者，该Listener所监听的配置信息发生了变更。接下来，还是让我们看看safeNatofyListener代码，再得出最终结论吧（主要关注3行代码，完整详细代码请自行阅读源码）:
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-client-12.png?raw=true" alt="deep-in-nacos-for-client-12" />
+<br /><br />
+如上，safeNatifyListener主要的三个步骤：#1，获取最新的配置信息；#2，调用Listener#receiveConfigInfo回调方法；#3，最后更新listenerWrap的md5值。Yahho~果然如此，长轮询内进行md5值比对后会决定是否触发回调。
+<br /></p>
+
+<h3 id="33-小结">3.3 小结</h3>
+
+<p>到此为止，从客户端对配置中心的完整流程已经分析关闭，我们做一个小结：<br /></p>
+<ul>
+  <li>Nacos服务端创建一个配置后，客户端可对此配置信息进行监听;</li>
+  <li>客户端通过定时任务每间隔10ms来检查配置信息是否变更;</li>
+  <li>服务端配置信息发生变更，客户端将会获取到变更的数据，并将新的配置数据更新到CacheData中，并计算CacheData的新的md5属性值;</li>
+  <li>比较CacheData的新的md5值是否和所持有的listeners的md5值一致，不一致，则回调listener的receiveConfigInfo方法并更新listenerWrap的md5值;</li>
+  <li>其中，出于对服务端故障的考虑，客户端会将最新数据获取后会保存在本地的snapshot文件中，在此之后会优先从本地文件中获取配置信息。</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="4从服务端潜入nacos实时更新配置原理">4.从服务端潜入Nacos实时更新配置原理</h2>
+
+<h3 id="41-configservletinner--clientlongpolling">4.1 ConfigServletInner &amp;&amp; ClientLongPolling</h3>
+
+<p>我们从哪里作为切入点进行分析呢？还记得<code>ClientWorker#checkUpdateDataIds</code>方法吧，里面会去请求调用Nacos服务端API来获取值变化了的DataID列表。所以，我们可以轻易从<code>ClientWorker#checkUpdateDataIds</code> -&gt; <code>ClientWorker#checkUpdateConfigStr</code> -&gt; <code>HttpResult result = agent.httpPost(Constants.CONFIG_CONTROLLER_PATH + "/listener", headers, params, agent.getEncode(), readTimeoutMs);</code>，到此，我们可以得出客户端通过http请求的服务端API为<code>v1/cs/configs/listener</code>。我们直接从通过IDEA的双击Shift键进行快速查询定位该API所在位置，要记得当前是POST请求而不是GET请求哦。
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-1.png?raw=true" alt="deep-in-nacos-for-server-1" />
+<br /><br />
+然后，我们可以定位到nacos config模块下<code>com.alibaba.nacos.config.server.controller.ConfigController#listener</code>方法，通过注释知道该API是用于比较MD5的。其中，通过对httpervletRequest参数进行解析转换后，交给inner对象去做长轮询。
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-2.png?raw=true" alt="deep-in-nacos-for-server-2" />
+<br /><br />
+接下来，我们看一下<code>inner.doPollingConfig(request, response, clientMd5Map, probeModify.length())</code>内部主要做了什么呢？其中，该 inner 对象是<code>com.alibaba.nacos.config.server.controller.ConfigServletInner</code>。
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-3.png?raw=true" alt="deep-in-nacos-for-server-3" />
+<br /><br />
+通过查看<code>ConfigServletInner#doPollingConfig</code>不仅支持长轮询，也支持短轮询的逻辑。在此，我们只看长轮询部分。
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-4.png?raw=true" alt="deep-in-nacos-for-server-4" />
+<br /><br />
+我们会发现<code>LongPollingService#addLongPollingClient</code>中最后一行代码是把客户端的长轮询请求封装成一个<code>ClientLongPolling</code>对象提交给<code>scheduler</code>去异步执行。
+<br />
+但是，有个问题：<strong style="color:red;">服务端拿到客户端指定的超时时间后，为何要减去500ms作为timeout时间呢？</strong>（注意：这里如果<code>isFixedPolling()</code>方法为true，timeout会是一个固定的时间间隔，默认是10000ms，也就是10s）<br /><br />
+我们先记录这个问题，然后继续往下走，去查看<code>ClientLongPolling</code>主要做了什么：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-5.png?raw=true" alt="deep-in-nacos-for-server-5" />
+<br /><br />
+我们发现<code>ClientLongPolling</code>主要做了这几件事：<br />
+（1）创建一个延迟调度任务，延迟时间为上述计算的timeout<br />
+（2）将该<code>ClientLongPolling</code>添加到<code>allSubs</code>中<br />
+（3）延迟时间到后，会将该<code>ClientLongPolling</code>实例从<code>allSubs</code>中删除（删除订阅关系）<br />
+（4）获取服务端中保存的对应客户端请求且未发生变更的changedGroupKeys，将其写入到reponse返回给客户端（之后客户端拿到changeGroupKeys所做的操作在<a href="http://www.buildupchao.cn/technology-challenge/2019/12/26/how-to-refresh-conf-automatically-for-nacos.html#client-rt-load-config">从客户端潜入Nacos实时更新配置原理</a>部分已经解析）
+<br /><br />
+这里有个疑问，为什么已经有延迟执行了，还要做一下<code>allSubs</code>添加、删除<code>ClientLongPolling</code>实例的操作呢？看代码注释提示是<strong style="color:red;">删除订阅关系</strong>，我们可以知道<code>ClientLongPolling</code>是被订阅的，但是这个订阅关系指的又是什么呢？我们猜测一下，之前对客户端实时更新配置分析时，我们知道一旦配置更新，客户端能立即得到变更信息，而服务端这里却是有timeout时延的，所以，这种订阅关系是不是和配置变更有关系呢？这里仅仅是猜测，我们依然先记录这个问题，继续从代码中寻求答案。</p>
+
+<h3 id="42-从更改配置操作作为切入点">4.2 从更改配置操作作为切入点</h3>
+
+<p><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-6.png?raw=true" alt="deep-in-nacos-for-server-6" />
+<br /><br />
+由浏览前F12请求情况可知，更新配置，会调用<code>POST:/nacos/v1/cs/configs</code>API，具体的方法时<code>ConfigController#publishConfig</code>方法：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-7.png?raw=true" alt="deep-in-nacos-for-server-7" />
+<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-8.png?raw=true" alt="deep-in-nacos-for-server-8" />
+<br /><br />
+通过上述代码可知，修改配置后，服务端先通过<code>persistService.insertOrUpdate</code>将配置信息进行了更新，然后调用<code>EventDispatcher#fireEvent</code>触发一个<code>ConfigDataChangeEvent</code>事件。接下来，我们来查看一下fireEvent方法主要做了什么:
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-9.png?raw=true" alt="deep-in-nacos-for-server-9" />
+<br /><br />
+由此可见，fireEvent主要是根据事件class获取listener列表（<code>CopyOnWriteArrayList&lt;EventDispatcher.AbstractEventListener&gt;</code>），然后循环调用每个listener的onEvent方法。而listener是通过<code>EventDispatcher#addEventListener</code>添加到listeners中。因此，我们只需找到调用<code>EventDispatcher#addEventListener</code>方法的地方，即可得知需要触发哪些<code>AbstractEventListener</code>的onEvent回调方法。
+<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-10.png?raw=true" alt="deep-in-nacos-for-server-10" />
+<br /><br />
+我们发现<code>AbstractEventListener</code>构造方法调用了<code>EventDispatcher.addEventListener(this)</code>方法，但是显然<code>AbstractEventListener</code>是抽象类，应找具体的实现类，很巧，一个熟悉的身影出现在面前：<code>LongPollingService</code>。
+<br /><br />
+所以，我们可以显而易见两条线路：<br />
+（1）在nacos控制台更改配置信息时 -&gt; 调用<code>POST:/nacos/v1/cs/configs</code>API  -&gt; 触发<code>ConfigDataChangeEvent</code>事件 -&gt; 调用listener的onEvent方法 -&gt; LongPollingService#onEvent<br />
+（2）在nacos控制台更改配置信息时 -&gt; 调用<code>POST:/nacos/v1/cs/configs</code>API  -&gt; 触发<code>ConfigDataChangeEvent</code>事件 -&gt; 调用listener的onEvent方法 -&gt; AsyncNotifyService#onEvent
+<br /><br />
+那到底哪个是我们想要的呢？还记得我们触发的事件类型吗？没错，是<code>ConfigDataChangeEvent</code>事件，所以我们只需对比两条线路哪个是处理的该类型事件即可。
+<br /><br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-11.png?raw=true" alt="deep-in-nacos-for-server-11" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-12.png?raw=true" alt="deep-in-nacos-for-server-12" />
+<br /><br />
+经过上述<code>LongPollingService#onEvent</code>和<code>AsyncNotifyService#onEvent</code>初步查看，基本可以确定<code>AsyncNotifyService</code>是我们想要的，但是事实真的是如此吗？我们通过查看<code>AsyncNotifyService.AsyncTask#executeAsyncInvoke</code>中并没有任何相关性。那么你可能会说，<code>LongPollingService#onEvent</code>处理的是<code>LocalDataChangeEvent</code>岂不是更不相关？
+<br /><br />
+然而答案却是<code>LongPollingService</code>，我们不要被表象所迷惑了。为什么呢？在Nacos中有一个DumpService，它会定时把变更后的数据dump到磁盘上。DumpService在Spring启动之后，会调用init方法启动几个dump任务，然后在任务执行结束之后，会触发一个LocalDataChangeEvent 的事件。
+<br /><br />
+我们来看一下代码流转过程吧：
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-13.png?raw=true" alt="deep-in-nacos-for-server-13" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-14.png?raw=true" alt="deep-in-nacos-for-server-14" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-15.png?raw=true" alt="deep-in-nacos-for-server-15" />
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-16.png?raw=true" alt="deep-in-nacos-for-server-16" />
+<br /><br />
+代码流程过程大致为：<code>DumpService#init</code> -&gt; <code>DumpAllProcessor#process</code> -&gt; <code>ConfigService#dump</code> -&gt; <code>ConfigService#updateMd5</code> -&gt; <code>EventDispatcher.fireEvent(new LocalDataChangeEvent(groupKey))</code>
+<br /><br />
+所以，我们还是要会回到<code>LongPollingService#onEvent</code>中，其中会启动一个<code>DataChangeTask</code>线程，其中会有一个循环迭代器从<code>allSubs</code>里面获取<code>ClientLongPolling</code>对象，删除订阅关系后，调用<code>ClientLongPolling#sendResponse</code>将数据返回给客户端，这就是为什么配置信息可以实时触发更新的缘由了。
+<br /><br />
+那如果<code>DataChangeTask</code>任务完成了数据返回客户端后，<code>ClientLongPolling</code>中延迟任务开始执行怎么办？
+<br />
+haha~No Problem.因为在<code>DataChangeTask</code>调用<code>ClientLongPolling#sendResponse</code>返回数据给客户端时，会先取消超时任务，然后再反馈数据给客户端。代码如下:
+<br />
+<img src="http://github.com/buildupchao/ImgStore/blob/master/blog/technologychallenge/nacos/deep-in-nacos-for-server-17.png?raw=true" alt="deep-in-nacos-for-server-17" /></p>
+
+<h3 id="43-小结">4.3 小结</h3>
+
+<p>到此为止，从服务端对配置中心的完整流程已经分析关闭，我们做一个小结:
+<br /></p>
+<ul>
+  <li>服务端接收到客户端发起的长轮询后，先比较缓存中的数据是否相同。
+    <ul>
+      <li>如果不同，直接返回；</li>
+      <li>如果相同，则通过schedule延迟29.5s后再执行比较</li>
+    </ul>
+  </li>
+  <li>为保证服务端在29.5s内发生配置信息变更时能及时通知客户端，服务端采用了事件订阅的方式监听<code>LocalDataChangeEvent</code>事件
+    <ul>
+      <li>收到<code>LocalDataChangeEvent</code>事件，触发<code>DataChangeTask</code>任务，遍历allSubs列队中的<code>ClientLongPolling</code>并将数据写回给客户端。</li>
+    </ul>
+  </li>
+  <li>关于timeout时间去除500ms，这个要好好品。你品，你细品，你细细品。</li>
+</ul>
+
+<h2 id="5结尾">5.结尾</h2>
+
+<p>留几个问题吧：<br /></p>
+<ul>
+  <li>为什么Nacos采用客户端拉取服务端配置的方式，而不是采用服务端主动推送数据给客户端呢？</li>
+  <li>为何<code>ClientWorker</code>中采用上一个<code>LongPollingRunnable</code>线程执行完毕再通过<code>ScheduledExecutorService</code>进行提交下一次任务的方式，既然不采用<code>ScheduledExecutorService</code>的定时调度特性却如何创建了该类型线程池呢？</li>
+  <li>分析客户端实时获取配置信息时，<code>CacheData</code>高频出现，可见其重要性，自己主动去阅读下其源码？</li>
+  <li>通过上述分析，我们知道只要是使用配置的场景基本都可以用Nacos来进行管理，那么Nacos有哪些适用场景呢？举几个例子？</li>
+  <li>nacos客户端和服务端设计上，都考虑到了哪些设计模式/理念呢？</li>
+</ul>
+
+<p>就先留这几个问题吧。<br /></p>
+
+<h2 id="6资料链接">6.资料链接</h2>
+
+<ul>
+  <li>Nacos官网：<a href="http://nacos.io/en-us/docs/what-is-nacos.html">http://nacos.io/en-us/docs/what-is-nacos.html</a></li>
+  <li>Nacos Github: <a href="http://github.com/alibaba/nacos">http://github.com/alibaba/nacos</a></li>
+</ul>
+
+<p><br /><br />
+<strong>如有疑问欢迎留言。</strong></p>
+
+
+            <div>
+   <p align="center">
+         	  
+             <img src="https://github.com/buildupchao/ImgStore/blob/master/blog/headportrait/buildupchao.jpg?raw=true" >
+            
+         <br/>
+          一个正在技术专家成长道路上不断努力前进的程序员
+   </p>
+   <p align="center" style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+       <strong>（转载本站文章请注明作者和出处 <a href="http://www.buildupchao.cn">buildupchao</a>）</strong>
+   </p>
+</div>
+
+
+            <div class="article-nav-wrapper">
+              
+<nav class="nav article-nav">
+  
+	  <span class="article-nav-prev"><i class="fa fa-angle-double-left"></i> <a href="/yearlysummary/2020/01/01/come-on-new-year.html" rel="prev">2020 Come On & Flag</a></span>
+  
+  
+	  <span class="article-nav-next"><a href="/technology-challenge/2019/12/23/technology-challenge-for-3-weeks.html" rel="next">三周技术挑战约定之缘起</a><i class="fa fa-angle-double-right"></i></span>
+  
+</nav>
+<style type="text/css">
+  .article-nav {
+      border-top: 1px solid #f2f2f2;
+      background-color: #fbfbfb;
+      overflow: hidden;
+      padding: 15px 20px;
+      font-size: 15px;
+      color: #bbb;
+  }
+
+  .article-nav span.article-nav-next {
+      float: right;
+      text-align: right;
+  }
+
+  .article-nav span {
+      float: left;
+      position: relative;
+      max-width: 50%;
+  }
+</style>
+
+            </div>
+            <!-- Comments -->
+            <div class="comment">
+             
+
+  
+
+  
+        <div id="gitalk-container"></div>
+        <script src="/assets/js/gitalk.min.js"></script>
+        <script src="/assets/js/md5.min.js"></script>
+        <script>
+        var gitalk = new Gitalk({
+            id: md5('/technology-challenge/2019/12/26/how-to-refresh-conf-automatically-for-nacos.html'),
+            clientID: '7875384262e8e900eafa',
+            clientSecret: 'e58288b5749a9437025983c9f144ba572949b41e',
+            repo: 'buildupchao.github.io',
+            owner: 'buildupchao',
+            admin: ['buildupchao'],
+            labels: ['gitalk'],
+            perPage: 50,
+        })
+        gitalk.render('gitalk-container')
+        </script>
+  
+
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Post Directory</h3>
+<div id="post-directory-module">
+<section class="post-directory">
+    <!-- Links that trigger the jumping -->
+    <!-- Added by javascript below -->
+    <dl></dl>
+</section>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $( "article h2" ).each(function( index ) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                    $(this).attr("id")
+                    + ">"
+                    + $(this).text()
+                    + "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function( index ) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                        $(this).attr("id")
+                        + ">"
+                        + "&nbsp;&nbsp;- " + $(this).text()
+                        + "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#post-directory-module').offset().top - 100;       // get initial position of the element
+
+        $(window).scroll(function() {                  // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#post-directory-module').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed',
+                    width: 'inherit'
+                });
+            } else {                                   // apply position: static
+                $('#post-directory-module').css({      // if you scroll above it
+                    position: 'inherit',
+                    width: 'inherit'
+                });
+            }
+
+        });
+
+        $("a.jumper").on("click", function( e ) {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($( $(this).attr('hre') ).offset().top - 100)
+            }, 600);
+
+        });
+    });
+
+</script>
+
+        </div>
+        
+    </div>
+
+</article>
+
+        </div>
+
+    
+<footer class="container">
+    <div class="site-footer">
+       <!--  <div class="site-footer-icons">
+            <a target="_blank" href="https://www.zhihu.com/people/ityouknow">
+               知乎
+            </a>
+            <a target="_blank" href="http://weibo.com/ityouknow">
+               微博
+            </a>
+            <a target="_blank" href="https://github.com/ityouknow">
+                GitHub
+            </a>
+        </div> -->
+          <div class="card text-center">
+            <ul class="list-inline" style="margin-left: 0;">
+               <li>
+                <a target="_blank" href="https://github.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.zhihu.com/people/zychao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa  fa-stack-1x fa-inverse">知</i>
+                  </span>
+                </a>
+              </li>
+                  <li>
+                <a target="_blank" href="https://weibo.com/buildupchao">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+        <div class="site-footer-links mobile-hidden">
+            
+        </div>
+<!--         <div class="site-footer-icons">
+               京ICP备15067287号-3
+        </div> -->
+        <!-- <div class="scrolltop">
+            京ICP备15067287号-3
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div> -->
+        <div class="scrolltop">
+          
+             <!-- 不蒜子统计 -->
+             <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次        </span>
+             <span class="post-meta-divider">|</span>
+             <span id="busuanzi_container_site_uv" style='display:none'>
+                     本站访客数<span id="busuanzi_value_site_uv"></span>人        </span>
+             <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+            <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+        </div>
+        <div class="rss">
+            <a href="/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a>
+            Power by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a>
+        </div>
+    </div>
+    <!-- Third-Party JS -->
+    <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+    <!-- My JS -->
+    <script type="text/javascript" src="/assets/js/script.js"></script>
+    
+
+     <!-- Cnzz Analytics -->
+       <div style="display:none">
+         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260945749'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1260945749' type='text/javascript'%3E%3C/script%3E"));</script>
+       </div>
+     <!-- Cnzz Analytics -->
+</footer>
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/assets/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/assets/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/assets/css/cb-search.css">
+
+<script src="/assets/js/bootstrap3-typeahead.min.js"></script>
+<script src="/assets/js/cb-search.js"></script>
+
+
+
+    </body>
+
+</html>
